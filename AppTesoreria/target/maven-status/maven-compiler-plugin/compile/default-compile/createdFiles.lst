@@ -59,6 +59,7 @@ view\PanelUsuario$10.class
 view\PanelEmpleado.class
 view\PanelUsuario$13.class
 view\resources\TablaUsuarioModelo.class
+view\JFrameLogin$4.class
 view\PanelEmpleado$8.class
 view\ValidadorDeCampos.class
 model\Empleado.class

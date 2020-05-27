@@ -6,6 +6,7 @@
 package view;
 
 import controller.LoginController;
+import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.tree.TreePath;
@@ -41,6 +42,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         }
         initComponents();
         this.setSize(1200, 750);
+        this.setTitle("Aplicacion de Tesoreria");
     }
 
     /**
@@ -53,6 +55,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPaneArbol = new javax.swing.JScrollPane();
+        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jlbl_usuario = new javax.swing.JLabel();
@@ -62,9 +65,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jlbl_puesto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1330, 850));
         setMinimumSize(new java.awt.Dimension(1330, 850));
-        setPreferredSize(new java.awt.Dimension(1330, 850));
+        setPreferredSize(new java.awt.Dimension(1330, 870));
         setResizable(false);
 
         jPanelArbol.setBackground(new java.awt.Color(255, 153, 51));
@@ -72,23 +76,39 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jPanelArbol.setMinimumSize(new java.awt.Dimension(350, 750));
         jPanelArbol.setPreferredSize(new java.awt.Dimension(350, 750));
 
+        jScrollPaneArbol.setBackground(new java.awt.Color(204, 204, 204));
+        jScrollPaneArbol.setBorder(null);
         jScrollPaneArbol.setAlignmentX(0.0F);
         jScrollPaneArbol.setAlignmentY(0.0F);
         jScrollPaneArbol.setMaximumSize(new java.awt.Dimension(350, 750));
         jScrollPaneArbol.setMinimumSize(new java.awt.Dimension(350, 750));
         jScrollPaneArbol.setPreferredSize(new java.awt.Dimension(350, 750));
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Tesoreria");
+        arbolModulos.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        arbolModulos.setForeground(new java.awt.Color(255, 255, 255));
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("El Porvenir");
         javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Administración General");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Empresa");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Organismo");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Personas");
         treeNode2.add(treeNode3);
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Empleados");
         treeNode2.add(treeNode3);
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Usuarios");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Movimientos");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Registro de Movimientos");
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Gestión de Turnos");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Asignar Turno");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Reasignar Turno");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Gestion de Tramite");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Procesar Tramite");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Ver cantidad de Tramites por Area");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Ver cantidad deTipo de tramite por Area");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         arbolModulos.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -98,6 +118,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         arbolModulos.setMinimumSize(new java.awt.Dimension(330, 750));
         arbolModulos.setName(""); // NOI18N
         arbolModulos.setPreferredSize(new java.awt.Dimension(330, 750));
+        arbolModulos.setShowsRootHandles(true);
         arbolModulos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 arbolModulosMouseClicked(evt);
@@ -120,7 +141,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanelContenido.setBackground(new java.awt.Color(153, 255, 204));
+        jPanelContenido.setBackground(new java.awt.Color(89, 97, 106));
         jPanelContenido.setAlignmentX(0.0F);
         jPanelContenido.setAlignmentY(0.0F);
         jPanelContenido.setAutoscrolls(true);
@@ -129,36 +150,52 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jPanelContenido.setName(""); // NOI18N
         jPanelContenido.setPreferredSize(new java.awt.Dimension(950, 750));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/background2.fw.png"))); // NOI18N
+        jLabel2.setToolTipText("");
+        jLabel2.setPreferredSize(new java.awt.Dimension(700, 700));
+
         javax.swing.GroupLayout jPanelContenidoLayout = new javax.swing.GroupLayout(jPanelContenido);
         jPanelContenido.setLayout(jPanelContenidoLayout);
         jPanelContenidoLayout.setHorizontalGroup(
             jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 950, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelContenidoLayout.createSequentialGroup()
+                .addContainerGap(160, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
+                .addGap(86, 86, 86))
         );
         jPanelContenidoLayout.setVerticalGroup(
             jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelContenidoLayout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(24, 24, 24))
         );
 
-        jPanel3.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel3.setBackground(new java.awt.Color(255, 149, 84));
         jPanel3.setMaximumSize(new java.awt.Dimension(1342, 60));
         jPanel3.setMinimumSize(new java.awt.Dimension(1342, 60));
         jPanel3.setPreferredSize(new java.awt.Dimension(1342, 60));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(89, 97, 106));
         jLabel1.setText("USUARIO:");
 
-        jlbl_usuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jlbl_usuario.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jlbl_usuario.setForeground(new java.awt.Color(89, 97, 106));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(89, 97, 106));
         jLabel3.setText("TIPO USUARIO");
 
-        jlbl_TipoUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jlbl_TipoUsuario.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jlbl_TipoUsuario.setForeground(new java.awt.Color(89, 97, 106));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(89, 97, 106));
         jLabel5.setText("TIPO EMPLEADO");
 
-        jlbl_puesto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jlbl_puesto.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jlbl_puesto.setForeground(new java.awt.Color(89, 97, 106));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -166,32 +203,33 @@ public class JFramePrincipal extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlbl_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(46, 46, 46)
                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlbl_TipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlbl_puesto, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addGap(69, 69, 69))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlbl_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                        .addComponent(jlbl_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlbl_puesto, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                        .addComponent(jlbl_TipoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jlbl_puesto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlbl_TipoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -199,15 +237,14 @@ public class JFramePrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanelArbol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)))
-                .addGap(18, 18, 18))
+                        .addComponent(jPanelContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,8 +254,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     .addComponent(jPanelArbol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanelContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -234,7 +271,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 Si ejecutamos nos daremos cuenta que esto
                 genera una excepciòn ya que la cadena es nula*/
 
-                if (captura.equals("[Tesoreria, Administración General, Empresa]")) {
+                if (captura.equals("[El Porvenir, Administración General, Organismo]")) {
                     
                     habilitarArbol(false);
 
@@ -247,9 +284,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     this.unPanelEmpresa.validate();
 
                 }
-
-
-                if (captura.equals("[Tesoreria, Administración General, Empleados]")) {
+                
+                if (captura.equals("[El Porvenir, Administración General, Empleados]")) {
 
                     habilitarArbol(false);
 
@@ -263,7 +299,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     this.unPanelEmpleado.validate();
                 }
 
-                if (captura.equals("[Tesoreria, Administración General, Usuarios]")) {
+                if (captura.equals("[El Porvenir, Administración General, Usuarios]")) {
 
                     habilitarArbol(false);
 
@@ -287,6 +323,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static final javax.swing.JTree arbolModulos = new javax.swing.JTree();
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel3;

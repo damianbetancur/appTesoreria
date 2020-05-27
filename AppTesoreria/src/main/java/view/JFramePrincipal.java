@@ -19,12 +19,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
     private TipoUsuario tipoUsuario = null;
     
-    private PanelOrganismo unPanelEmpresa;
-    private PanelPersona unPanelPersona;
+    private PanelEmpresa unPanelEmpresa;
     private PanelEmpleado unPanelEmpleado;
     private PanelUsuario unPanelUsuario;
-    private PanelProcesarTurno01 unPanelProcesarTurno01;
-    private PanelProcesarTramite01 unPanelProcesarTramite01;
 
     /**
      * captura la seleccion en el arbol
@@ -81,29 +78,17 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jScrollPaneArbol.setMinimumSize(new java.awt.Dimension(350, 750));
         jScrollPaneArbol.setPreferredSize(new java.awt.Dimension(350, 750));
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("El Porvenir");
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Tesoreria");
         javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Administración General");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Organismo");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Personas");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Empresa");
         treeNode2.add(treeNode3);
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Empleados");
         treeNode2.add(treeNode3);
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Usuarios");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Gestión de Turnos");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Asignar Turno");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Reasignar Turno");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Gestion de Tramite");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Procesar Tramite");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Ver cantidad de Tramites por Area");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Ver cantidad deTipo de tramite por Area");
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Movimientos");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Registro de Movimientos");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         arbolModulos.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -249,12 +234,12 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 Si ejecutamos nos daremos cuenta que esto
                 genera una excepciòn ya que la cadena es nula*/
 
-                if (captura.equals("[El Porvenir, Administración General, Organismo]")) {
+                if (captura.equals("[Tesoreria, Administración General, Empresa]")) {
                     
                     habilitarArbol(false);
 
                     //Se crea el Panel Emplesa
-                    this.unPanelEmpresa = new PanelOrganismo();
+                    this.unPanelEmpresa = new PanelEmpresa();
                     this.unPanelEmpresa.setSize(950, 750);
                     this.unPanelEmpresa.setVisible(true);
 
@@ -263,20 +248,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
                 }
 
-                if (captura.equals("[El Porvenir, Administración General, Personas]")) {
 
-                    habilitarArbol(false);
-
-                    //Se crea el Panel Emplesa
-                    this.unPanelPersona = new PanelPersona();
-                    this.unPanelPersona.setSize(950, 750);
-                    this.unPanelPersona.setVisible(true);
-
-                    this.jPanelContenido.add(this.unPanelPersona);
-                    
-                    this.unPanelPersona.validate();
-                }
-                if (captura.equals("[El Porvenir, Administración General, Empleados]")) {
+                if (captura.equals("[Tesoreria, Administración General, Empleados]")) {
 
                     habilitarArbol(false);
 
@@ -290,7 +263,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     this.unPanelEmpleado.validate();
                 }
 
-                if (captura.equals("[El Porvenir, Administración General, Usuarios]")) {
+                if (captura.equals("[Tesoreria, Administración General, Usuarios]")) {
 
                     habilitarArbol(false);
 
@@ -304,33 +277,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     this.unPanelUsuario.validate();
                 }
 
-                if (captura.equals("[El Porvenir, Gestión de Turnos, Asignar Turno]")) {
-
-                    habilitarArbol(false);
-                    
-                    //Se crea el Panel Emplesa
-                    this.unPanelProcesarTurno01 = new PanelProcesarTurno01();
-                    this.unPanelProcesarTurno01.setSize(950, 750);
-                    this.unPanelProcesarTurno01.setVisible(true);
-
-                    this.jPanelContenido.add(this.unPanelProcesarTurno01);
-                    
-                    this.unPanelProcesarTurno01.validate();
-                }
                 
-                if (captura.equals("[El Porvenir, Gestion de Tramite, Procesar Tramite]")) {
-
-                    habilitarArbol(false);
-                    
-                    //Se crea el Panel Emplesa
-                    this.unPanelProcesarTramite01 = new PanelProcesarTramite01();
-                    this.unPanelProcesarTramite01.setSize(950, 750);
-                    this.unPanelProcesarTramite01.setVisible(true);
-
-                    this.jPanelContenido.add(this.unPanelProcesarTramite01);
-                    
-                    this.unPanelProcesarTramite01.validate();
-                }
 
             }
         }

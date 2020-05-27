@@ -6,41 +6,40 @@
 package model;
 
 import java.io.Serializable;
-import javax.persistence.Column;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Ariel
  */
 @Entity
-@Table(name = "USUARIO")
-public class Usuario implements Serializable {
+public class Cuenta implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "nombre")
-    private String nombre;
+    private String numeroDeCuenta;
 
-    @Column(name = "clave")
-    private String clave;
-
-    @ManyToOne
-    @JoinColumn(name = "id_tipoUsuario")
-    private TipoUsuario tipoUsuario;
+    @OneToMany(mappedBy = "unaCuenta")
+    private List<RegistroDeMovimiento> registros;
 
     @ManyToOne
-    @JoinColumn(name = "id_Empleado")
-    private Empleado unEmpleado;
+    @JoinColumn(name = "fk_empresa")
+    private Empresa unaEmpresaC;
+
+    public Cuenta() {
+        this.registros = new ArrayList<>();
+    }
 
     public Long getId() {
         return id;
@@ -60,10 +59,10 @@ public class Usuario implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
+        if (!(object instanceof Cuenta)) {
             return false;
         }
-        Usuario other = (Usuario) object;
+        Cuenta other = (Cuenta) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -72,39 +71,32 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Usuario[ id=" + id + " ]";
+        return "model.Cuenta[ id=" + id + " ]";
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNumeroDeCuenta() {
+        return numeroDeCuenta;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNumeroDeCuenta(String numeroDeCuenta) {
+        this.numeroDeCuenta = numeroDeCuenta;
     }
 
-    public String getClave() {
-        return clave;
+    public Empresa getUnaEmpresaC() {
+        return unaEmpresaC;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setUnaEmpresaC(Empresa unaEmpresaC) {
+        this.unaEmpresaC = unaEmpresaC;
     }
 
-    public TipoUsuario getTipoUsuario() {
-        return tipoUsuario;
+    public List<RegistroDeMovimiento> getRegistros() {
+        return registros;
     }
 
-    public void setTipoUsuario(TipoUsuario tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
+    public void setRegistros(List<RegistroDeMovimiento> registros) {
+        this.registros = registros;
     }
 
-    public Empleado getUnEmpleado() {
-        return unEmpleado;
-    }
-
-    public void setUnEmpleado(Empleado unEmpleado) {
-        this.unEmpleado = unEmpleado;
-    }
-
+    
 }

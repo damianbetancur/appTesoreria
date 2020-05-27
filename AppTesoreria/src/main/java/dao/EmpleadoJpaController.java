@@ -7,18 +7,15 @@ package dao;
 
 import dao.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import model.Organismo;
-import model.Area;
-import model.TipoTramite;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import model.Empleado;
+import model.Empresa;
 
 /**
  *
@@ -36,41 +33,19 @@ public class EmpleadoJpaController implements Serializable {
     }
 
     public void create(Empleado empleado) {
-        if (empleado.getTipoTramite() == null) {
-            empleado.setTipoTramite(new ArrayList<TipoTramite>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Organismo unOrganismoC = empleado.getUnOrganismoC();
-            if (unOrganismoC != null) {
-                unOrganismoC = em.getReference(unOrganismoC.getClass(), unOrganismoC.getId());
-                empleado.setUnOrganismoC(unOrganismoC);
+            Empresa unaEmpresaE = empleado.getUnaEmpresaE();
+            if (unaEmpresaE != null) {
+                unaEmpresaE = em.getReference(unaEmpresaE.getClass(), unaEmpresaE.getId());
+                empleado.setUnaEmpresaE(unaEmpresaE);
             }
-            Area unAreaA = empleado.getUnAreaA();
-            if (unAreaA != null) {
-                unAreaA = em.getReference(unAreaA.getClass(), unAreaA.getId());
-                empleado.setUnAreaA(unAreaA);
-            }
-            List<TipoTramite> attachedTipoTramite = new ArrayList<TipoTramite>();
-            for (TipoTramite tipoTramiteTipoTramiteToAttach : empleado.getTipoTramite()) {
-                tipoTramiteTipoTramiteToAttach = em.getReference(tipoTramiteTipoTramiteToAttach.getClass(), tipoTramiteTipoTramiteToAttach.getId());
-                attachedTipoTramite.add(tipoTramiteTipoTramiteToAttach);
-            }
-            empleado.setTipoTramite(attachedTipoTramite);
             em.persist(empleado);
-            if (unOrganismoC != null) {
-                unOrganismoC.getEmpleados().add(empleado);
-                unOrganismoC = em.merge(unOrganismoC);
-            }
-            if (unAreaA != null) {
-                unAreaA.getEmpleados().add(empleado);
-                unAreaA = em.merge(unAreaA);
-            }
-            for (TipoTramite tipoTramiteTipoTramite : empleado.getTipoTramite()) {
-                tipoTramiteTipoTramite.getEmpleados().add(empleado);
-                tipoTramiteTipoTramite = em.merge(tipoTramiteTipoTramite);
+            if (unaEmpresaE != null) {
+                unaEmpresaE.getEmpleados().add(empleado);
+                unaEmpresaE = em.merge(unaEmpresaE);
             }
             em.getTransaction().commit();
         } finally {
@@ -86,55 +61,20 @@ public class EmpleadoJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Empleado persistentEmpleado = em.find(Empleado.class, empleado.getId());
-            Organismo unOrganismoCOld = persistentEmpleado.getUnOrganismoC();
-            Organismo unOrganismoCNew = empleado.getUnOrganismoC();
-            Area unAreaAOld = persistentEmpleado.getUnAreaA();
-            Area unAreaANew = empleado.getUnAreaA();
-            List<TipoTramite> tipoTramiteOld = persistentEmpleado.getTipoTramite();
-            List<TipoTramite> tipoTramiteNew = empleado.getTipoTramite();
-            if (unOrganismoCNew != null) {
-                unOrganismoCNew = em.getReference(unOrganismoCNew.getClass(), unOrganismoCNew.getId());
-                empleado.setUnOrganismoC(unOrganismoCNew);
+            Empresa unaEmpresaEOld = persistentEmpleado.getUnaEmpresaE();
+            Empresa unaEmpresaENew = empleado.getUnaEmpresaE();
+            if (unaEmpresaENew != null) {
+                unaEmpresaENew = em.getReference(unaEmpresaENew.getClass(), unaEmpresaENew.getId());
+                empleado.setUnaEmpresaE(unaEmpresaENew);
             }
-            if (unAreaANew != null) {
-                unAreaANew = em.getReference(unAreaANew.getClass(), unAreaANew.getId());
-                empleado.setUnAreaA(unAreaANew);
-            }
-            List<TipoTramite> attachedTipoTramiteNew = new ArrayList<TipoTramite>();
-            for (TipoTramite tipoTramiteNewTipoTramiteToAttach : tipoTramiteNew) {
-                tipoTramiteNewTipoTramiteToAttach = em.getReference(tipoTramiteNewTipoTramiteToAttach.getClass(), tipoTramiteNewTipoTramiteToAttach.getId());
-                attachedTipoTramiteNew.add(tipoTramiteNewTipoTramiteToAttach);
-            }
-            tipoTramiteNew = attachedTipoTramiteNew;
-            empleado.setTipoTramite(tipoTramiteNew);
             empleado = em.merge(empleado);
-            if (unOrganismoCOld != null && !unOrganismoCOld.equals(unOrganismoCNew)) {
-                unOrganismoCOld.getEmpleados().remove(empleado);
-                unOrganismoCOld = em.merge(unOrganismoCOld);
+            if (unaEmpresaEOld != null && !unaEmpresaEOld.equals(unaEmpresaENew)) {
+                unaEmpresaEOld.getEmpleados().remove(empleado);
+                unaEmpresaEOld = em.merge(unaEmpresaEOld);
             }
-            if (unOrganismoCNew != null && !unOrganismoCNew.equals(unOrganismoCOld)) {
-                unOrganismoCNew.getEmpleados().add(empleado);
-                unOrganismoCNew = em.merge(unOrganismoCNew);
-            }
-            if (unAreaAOld != null && !unAreaAOld.equals(unAreaANew)) {
-                unAreaAOld.getEmpleados().remove(empleado);
-                unAreaAOld = em.merge(unAreaAOld);
-            }
-            if (unAreaANew != null && !unAreaANew.equals(unAreaAOld)) {
-                unAreaANew.getEmpleados().add(empleado);
-                unAreaANew = em.merge(unAreaANew);
-            }
-            for (TipoTramite tipoTramiteOldTipoTramite : tipoTramiteOld) {
-                if (!tipoTramiteNew.contains(tipoTramiteOldTipoTramite)) {
-                    tipoTramiteOldTipoTramite.getEmpleados().remove(empleado);
-                    tipoTramiteOldTipoTramite = em.merge(tipoTramiteOldTipoTramite);
-                }
-            }
-            for (TipoTramite tipoTramiteNewTipoTramite : tipoTramiteNew) {
-                if (!tipoTramiteOld.contains(tipoTramiteNewTipoTramite)) {
-                    tipoTramiteNewTipoTramite.getEmpleados().add(empleado);
-                    tipoTramiteNewTipoTramite = em.merge(tipoTramiteNewTipoTramite);
-                }
+            if (unaEmpresaENew != null && !unaEmpresaENew.equals(unaEmpresaEOld)) {
+                unaEmpresaENew.getEmpleados().add(empleado);
+                unaEmpresaENew = em.merge(unaEmpresaENew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -165,20 +105,10 @@ public class EmpleadoJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The empleado with id " + id + " no longer exists.", enfe);
             }
-            Organismo unOrganismoC = empleado.getUnOrganismoC();
-            if (unOrganismoC != null) {
-                unOrganismoC.getEmpleados().remove(empleado);
-                unOrganismoC = em.merge(unOrganismoC);
-            }
-            Area unAreaA = empleado.getUnAreaA();
-            if (unAreaA != null) {
-                unAreaA.getEmpleados().remove(empleado);
-                unAreaA = em.merge(unAreaA);
-            }
-            List<TipoTramite> tipoTramite = empleado.getTipoTramite();
-            for (TipoTramite tipoTramiteTipoTramite : tipoTramite) {
-                tipoTramiteTipoTramite.getEmpleados().remove(empleado);
-                tipoTramiteTipoTramite = em.merge(tipoTramiteTipoTramite);
+            Empresa unaEmpresaE = empleado.getUnaEmpresaE();
+            if (unaEmpresaE != null) {
+                unaEmpresaE.getEmpleados().remove(empleado);
+                unaEmpresaE = em.merge(unaEmpresaE);
             }
             em.remove(empleado);
             em.getTransaction().commit();

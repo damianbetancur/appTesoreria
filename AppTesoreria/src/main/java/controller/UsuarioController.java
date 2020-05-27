@@ -7,7 +7,6 @@ package controller;
 
 import dao.Conexion;
 import dao.EmpleadoJpaController;
-import dao.PersonaJpaController;
 import dao.TipoUsuarioJpaController;
 import dao.UsuarioJpaController;
 import dao.exceptions.NonexistentEntityException;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import model.Empleado;
-import model.Persona;
 import model.TipoUsuario;
 import model.Usuario;
 
@@ -28,14 +26,12 @@ public class UsuarioController {
     //DAO
     private final UsuarioJpaController usuarioDAO;
     private final EmpleadoJpaController empleadoDAO;
-    private final PersonaJpaController personaDAO;
     private final TipoUsuarioJpaController tipoUsuarioDAO;
 
     public UsuarioController() {
         this.usuarioDAO = new UsuarioJpaController(Conexion.getEmf());
         this.tipoUsuarioDAO = new TipoUsuarioJpaController(Conexion.getEmf());
         this.empleadoDAO = new EmpleadoJpaController(Conexion.getEmf());
-        this.personaDAO = new PersonaJpaController(Conexion.getEmf());
     }
 
     public boolean agregarUsuario(Usuario nuevoUsuario) {
@@ -48,18 +44,17 @@ public class UsuarioController {
         }
 
         if (nicknamePermitido) {
-            
+
             System.out.println("USUARIO");
-            System.out.println("nombre"+nuevoUsuario.getNombre());
-            System.out.println("clave"+nuevoUsuario.getClave());
-            System.out.println("Tipo de usuario"+nuevoUsuario.getTipoUsuario());
-            System.out.println("empleado"+nuevoUsuario.getUnEmpleado());
-            System.out.println("persona"+nuevoUsuario.getUnaPersona());
-           
-            if (nuevoUsuario.getUnEmpleado() == null && nuevoUsuario.getUnaPersona() == null) {
+            System.out.println("nombre" + nuevoUsuario.getNombre());
+            System.out.println("clave" + nuevoUsuario.getClave());
+            System.out.println("Tipo de usuario" + nuevoUsuario.getTipoUsuario());
+            System.out.println("empleado" + nuevoUsuario.getUnEmpleado());
+
+            if (nuevoUsuario.getUnEmpleado() == null) {
                 //usuarioDAO.create(nuevoUsuario);
-            } else{
-                
+            } else {
+
             }
 
         }
@@ -112,13 +107,13 @@ public class UsuarioController {
         }
         return tiposUsuariosEncontrados;
     }
-    
+
     public List<Empleado> buscarTodosLosEmpleados() {
         List<Empleado> empleadosEncontrados = new ArrayList<>();
         empleadosEncontrados = empleadoDAO.findEmpleadoEntities();
         return empleadosEncontrados;
     }
-    
+
     public List<Empleado> buscarEmpleadoDeUsuarioPorDNI(String dni) {
         List<Empleado> empleadosEncontrados = new ArrayList<>();
         for (Empleado empleadoRecorrido : empleadoDAO.findEmpleadoEntities()) {
@@ -127,22 +122,6 @@ public class UsuarioController {
             }
         }
         return empleadosEncontrados;
-    }
-    
-    public List<Persona> buscarTodasLasPersonas() {
-        List<Persona> personasEncontradas = new ArrayList<>();
-        personasEncontradas = personaDAO.findPersonaEntities();
-        return personasEncontradas;
-    }
-
-    public List<Persona> buscarPersonaDeUsuarioPorDNI(String dni) {
-        List<Persona> personasEncontradas = new ArrayList<>();
-        for (Persona personaRecorrido : personaDAO.findPersonaEntities()) {
-            if (personaRecorrido.getDni().contains(dni)) {
-                personasEncontradas.add(personaRecorrido);
-            }
-        }
-        return personasEncontradas;
     }
 
 }

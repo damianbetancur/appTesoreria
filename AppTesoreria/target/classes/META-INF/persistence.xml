@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="com.mycompany_GestorTurno10_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="com.mycompany_AppTesoreria_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>model.Area</class>
+    <class>model.Concepto</class>
+    <class>model.Cuenta</class>
     <class>model.Empleado</class>
-    <class>model.EstadoTurno</class>
-    <class>model.HorarioAtencionTurno</class>
-    <class>model.Organismo</class>
-    <class>model.Persona</class>
-    <class>model.RequisitoObligatorio</class>
-    <class>model.RequisitoOpcional</class>
-    <class>model.TipoAtencion</class>
+    <class>model.Empresa</class>
+    <class>model.LineaDeMovimiento</class>
+    <class>model.RegistroDeMovimiento</class>
     <class>model.TipoEmpleado</class>
-    <class>model.TipoPersona</class>
-    <class>model.TipoTramite</class>
+    <class>model.TipoMovimiento</class>
     <class>model.TipoUsuario</class>
-    <class>model.Tramite</class>
-    <class>model.Turno</class>
     <class>model.Usuario</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/turnos01?serverTimezone=UTC"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tesoreria?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="admin"/>

@@ -17,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import model.Area;
 import model.Empleado;
 import model.TipoEmpleado;
 import view.resources.TablaEmpleadoModelListener;
@@ -122,8 +121,6 @@ public class PanelEmpleado extends javax.swing.JPanel implements InterfacePanel 
         jlbl_alertaApellido = new javax.swing.JLabel();
         jlbl_alertaDNI = new javax.swing.JLabel();
         jlbl_alertaTipoPersona = new javax.swing.JLabel();
-        jcb_area = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
         jbtn_volver = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -255,18 +252,12 @@ public class PanelEmpleado extends javax.swing.JPanel implements InterfacePanel 
 
         jlbl_alertaTipoPersona.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jcb_area.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jcb_area.setModel(tipoAreaModel);
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("AREA");
-
         javax.swing.GroupLayout jPanel_datosLayout = new javax.swing.GroupLayout(jPanel_datos);
         jPanel_datos.setLayout(jPanel_datosLayout);
         jPanel_datosLayout.setHorizontalGroup(
             jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_datosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(273, Short.MAX_VALUE)
                 .addComponent(jbtn_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbtn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,21 +270,17 @@ public class PanelEmpleado extends javax.swing.JPanel implements InterfacePanel 
                 .addGap(120, 120, 120)
                 .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jlbl_mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
-                    .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jcb_area, 0, 479, Short.MAX_VALUE)
-                        .addComponent(jcb_tipoEmpleado, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jtf_apellido)
-                        .addComponent(jtf_nombre)
-                        .addComponent(jtf_dni, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addComponent(jcb_tipoEmpleado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtf_apellido, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jtf_nombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jtf_dni))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlbl_alertaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -332,11 +319,7 @@ public class PanelEmpleado extends javax.swing.JPanel implements InterfacePanel 
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcb_tipoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlbl_alertaTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcb_area, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addGap(60, 60, 60)
                 .addComponent(jlbl_mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -446,9 +429,7 @@ public class PanelEmpleado extends javax.swing.JPanel implements InterfacePanel 
 
         this.jtb_empleado.setEnabled(false);
         cargarTiposDeEmpleado();
-        cargarAreas();
         this.jcb_tipoEmpleado.setSelectedItem(this.empleadoSeleccionado.getUnTipoEmpleado());
-        this.jcb_area.setSelectedItem(this.empleadoSeleccionado.getUnAreaA());
     }//GEN-LAST:event_jbtn_modificarActionPerformed
 
     /**
@@ -630,7 +611,6 @@ public class PanelEmpleado extends javax.swing.JPanel implements InterfacePanel 
         this.validador.limpiarCampo(this.jtf_dni);
         this.validador.limpiarCampo(this.jtf_buscarEmpleado);
         this.jcb_tipoEmpleado.removeAllItems();
-        this.jcb_area.removeAllItems();
         habilitarTodosLosBotones(false);
         habilitarTodosLosCampos(true);
         this.validador.habilitarBoton(false, this.jbtn_listar, new Color(30, 132, 73), Color.WHITE, null, null);
@@ -641,7 +621,6 @@ public class PanelEmpleado extends javax.swing.JPanel implements InterfacePanel 
 
         this.jtb_empleado.setEnabled(false);
         cargarTiposDeEmpleado();
-        cargarAreas();
 
     }//GEN-LAST:event_jbtn_agregarActionPerformed
 
@@ -716,7 +695,6 @@ public class PanelEmpleado extends javax.swing.JPanel implements InterfacePanel 
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel_crud;
     private javax.swing.JPanel jPanel_datos;
     private javax.swing.JScrollPane jScrollPaneTabla;
@@ -727,7 +705,6 @@ public class PanelEmpleado extends javax.swing.JPanel implements InterfacePanel 
     private javax.swing.JButton jbtn_listar;
     private javax.swing.JButton jbtn_modificar;
     private javax.swing.JButton jbtn_volver;
-    private javax.swing.JComboBox<String> jcb_area;
     private javax.swing.JComboBox<String> jcb_tipoEmpleado;
     private javax.swing.JLabel jlbl_alertaApellido;
     private javax.swing.JLabel jlbl_alertaDNI;
@@ -751,7 +728,6 @@ public class PanelEmpleado extends javax.swing.JPanel implements InterfacePanel 
         this.validador.habilitarCampo(estado, this.jtf_dni);
         this.validador.habilitarCampo(estado, this.jtf_buscarEmpleado);
         this.validador.habilitarCombobox(estado, this.jcb_tipoEmpleado);
-        this.validador.habilitarCombobox(estado, this.jcb_area);
     }
 
     @Override
@@ -761,7 +737,6 @@ public class PanelEmpleado extends javax.swing.JPanel implements InterfacePanel 
         this.validador.limpiarCampo(this.jtf_dni);
         this.validador.limpiarCampo(this.jtf_buscarEmpleado);
         this.jcb_tipoEmpleado.removeAllItems();
-        this.jcb_area.removeAllItems();
     }
 
     @Override
@@ -824,13 +799,7 @@ public class PanelEmpleado extends javax.swing.JPanel implements InterfacePanel 
         this.jcb_tipoEmpleado.setModel(mdl);
     }
     
-    /**
-     * Carga los tipos de persona el el JComboBox tipo de persona
-     */
-    public void cargarAreas() {
-        DefaultComboBoxModel mdl = new DefaultComboBoxModel(this.controlador.buscarTodasLasAreas());
-        this.jcb_area.setModel(mdl);
-    }
+   
 
     /**
      * Selecciona una fila de la tabla, devolviendo un objeto Persona
@@ -846,8 +815,6 @@ public class PanelEmpleado extends javax.swing.JPanel implements InterfacePanel 
             this.jtf_dni.setText(this.empleadoSeleccionado.getDni());
             this.jcb_tipoEmpleado.removeAllItems();
             this.jcb_tipoEmpleado.addItem(this.empleadoSeleccionado.getUnTipoEmpleado().getDescripcion());
-            this.jcb_area.removeAllItems();
-            this.jcb_area.addItem(this.empleadoSeleccionado.getUnAreaA().getNombre());
         } else {
             this.validador.habilitarBoton(false, this.jbtn_aceptar, new Color(30, 132, 73), Color.WHITE, null, null);
             this.validador.habilitarBoton(true, this.jbtn_eliminar, new Color(30, 132, 73), Color.WHITE, null, null);
@@ -873,7 +840,6 @@ public class PanelEmpleado extends javax.swing.JPanel implements InterfacePanel 
             nuevoEmpleado.setApellido(this.jtf_apellido.getText());
             nuevoEmpleado.setDni(this.jtf_dni.getText());
             nuevoEmpleado.setUnTipoEmpleado((TipoEmpleado) this.jcb_tipoEmpleado.getSelectedItem());
-            nuevoEmpleado.setUnAreaA((Area) this.jcb_area.getSelectedItem());
             this.jlbl_alertaNombre.setIcon(null);
             this.jlbl_alertaApellido.setIcon(null);
             this.jlbl_alertaDNI.setIcon(null);
@@ -957,7 +923,6 @@ public class PanelEmpleado extends javax.swing.JPanel implements InterfacePanel 
             nuevoEmpleado.setApellido(this.jtf_apellido.getText());
             nuevoEmpleado.setDni(this.jtf_dni.getText());
             nuevoEmpleado.setUnTipoEmpleado((TipoEmpleado) this.jcb_tipoEmpleado.getSelectedItem());
-            nuevoEmpleado.setUnAreaA((Area) this.jcb_area.getSelectedItem());
             this.jlbl_alertaNombre.setIcon(null);
             this.jlbl_alertaApellido.setIcon(null);
             this.jlbl_alertaDNI.setIcon(null);

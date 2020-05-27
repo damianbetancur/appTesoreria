@@ -164,48 +164,48 @@ public class UsuarioJpaController implements Serializable {
             em.close();
         }
     }
-    
-    public Usuario iniciarSesion(Usuario us){
+
+    public Usuario iniciarSesion(Usuario us) {
         EntityManager em = getEntityManager();
         Usuario usuario = null;
         String consulta;
         try {
-            consulta ="FROM Usuario u WHERE u.nombre = ?1 and u.clave = ?2";
+            consulta = "FROM Usuario u WHERE u.nombre = ?1 and u.clave = ?2";
             Query query = em.createQuery(consulta);
             query.setParameter(1, us.getNombre());
             query.setParameter(2, us.getClave());
-            
-            List <Usuario> lista = query.getResultList();
+
+            List<Usuario> lista = query.getResultList();
             if (!lista.isEmpty()) {
                 usuario = lista.get(0);
             }
         } catch (Exception e) {
             throw e;
-        } finally{
+        } finally {
             em.close();
         }
         return usuario;
     }
-    
-    
-    public Usuario verificarUsuario(Usuario us){
+
+    public Usuario verificarUsuario(Usuario us) {
         EntityManager em = getEntityManager();
         Usuario usuario = null;
         String consulta;
         try {
-            consulta ="FROM Usuario u WHERE u.nombre = ?1";
+            consulta = "FROM Usuario u WHERE u.nombre = ?1";
             Query query = em.createQuery(consulta);
             query.setParameter(1, us.getNombre());
-            
-            List <Usuario> lista = query.getResultList();
+
+            List<Usuario> lista = query.getResultList();
             if (!lista.isEmpty()) {
                 usuario = lista.get(0);
             }
         } catch (Exception e) {
             throw e;
-        } finally{
+        } finally {
             em.close();
         }
         return usuario;
     }
+
 }

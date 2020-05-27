@@ -6,9 +6,9 @@
 package controller;
 
 import dao.Conexion;
-import dao.OrganismoJpaController;
+import dao.EmpresaJpaController;
 import dao.UsuarioJpaController;
-import model.Organismo;
+import model.Empresa;
 import model.Usuario;
 
 /**
@@ -19,20 +19,20 @@ public class LoginController {
 
     //DAO
     private final UsuarioJpaController usuarioDAO;
-    private final OrganismoJpaController organismoDAO;
+    private final EmpresaJpaController empresaDAO;
 
     //Model
     private static Usuario usuarioRegistradoInstanciaUnica = null;
-    private static Organismo organismoInstanciaUnica = null;
+    private static Empresa empresaInstanciaUnica = null;
 
     public LoginController() {
         //Inicializacion de DAO
         this.usuarioDAO = new UsuarioJpaController(Conexion.getEmf());
-        this.organismoDAO = new OrganismoJpaController(Conexion.getEmf());
+        this.empresaDAO = new EmpresaJpaController(Conexion.getEmf());
         
-        //Singleton Organismo
-        this.organismoInstanciaUnica = organismoDAO.findOrganismo(1l);
-        createInstanceOrganismo();
+        //Singleton Empresa
+        this.empresaInstanciaUnica = empresaDAO.findEmpresa(1l);
+        createInstanceEmpresa();
     }
 
     /**
@@ -57,20 +57,20 @@ public class LoginController {
     /**
      * Creacion Singleton organismo
      */
-    private synchronized static void createInstanceOrganismo() {
-        if (organismoInstanciaUnica == null) {
-            organismoInstanciaUnica = new Organismo();
+    private synchronized static void createInstanceEmpresa() {
+        if (empresaInstanciaUnica == null) {
+            empresaInstanciaUnica = new Empresa();
         }
     }
 
     /**
-     * Devuele la instancia unica del Organismo
+     * Devuele la instancia unica del Empresa
      *
      * @return
      */
-    public static Organismo getInstanceOrganismo() {
+    public static Empresa getInstanceEmpresa() {
         createInstanceUsuario();
-        return organismoInstanciaUnica;
+        return empresaInstanciaUnica;
     }
 
     /**

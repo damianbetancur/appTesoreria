@@ -1,254 +1,34 @@
 
-/* Tipo Tramite*/
-INSERT INTO `turnos01`.`tipotramite` (`ID`, `CODIGO`, `NOMBRE`) VALUES ('1', '0001', 'Consulta Contable');
-INSERT INTO `turnos01`.`tipotramite` (`ID`, `CODIGO`, `NOMBRE`) VALUES ('2', '0002', 'Asesoria Legal');
-INSERT INTO `turnos01`.`tipotramite` (`ID`, `CODIGO`, `NOMBRE`) VALUES ('3', '0003', 'Asesoramiento Financiero');
-INSERT INTO `turnos01`.`tipotramite` (`ID`, `CODIGO`, `NOMBRE`) VALUES ('4', '0004', 'Reestructuracion Economica');
-INSERT INTO `turnos01`.`tipotramite` (`ID`, `CODIGO`, `NOMBRE`) VALUES ('5', '0005', 'Solicitud de Empleo');
-INSERT INTO `turnos01`.`tipotramite` (`ID`, `CODIGO`, `NOMBRE`) VALUES ('6', '0006', 'Capacitación Laboral');
-INSERT INTO `turnos01`.`tipotramite` (`ID`, `CODIGO`, `NOMBRE`) VALUES ('7', '0007', 'Pasantia');
-INSERT INTO `turnos01`.`tipotramite` (`ID`, `CODIGO`, `NOMBRE`) VALUES ('8', '0008', 'Solicitud de Prestamo');
-INSERT INTO `turnos01`.`tipotramite` (`ID`, `CODIGO`, `NOMBRE`) VALUES ('9', '0009', 'Solicitud de Planta funcional');
-INSERT INTO `turnos01`.`tipotramite` (`ID`, `CODIGO`, `NOMBRE`) VALUES ('10', '0010', 'Solicitud de impuestos pagos');
-INSERT INTO `turnos01`.`tipotramite` (`ID`, `CODIGO`, `NOMBRE`) VALUES ('11', '0011', 'Recepción de documentación');
+/* Empresa */
+INSERT INTO `tesoreria`.`empresa` (`ID`, `direccion`, `razon_social`, `telefono`) VALUES 
+('1', 'Av. Rivadavia 13000', 'Finanzas SRL', '(376)-4400100');
 
-
-/* Tipo Persona*/
-INSERT INTO `turnos01`.`tipopersona` (`ID`, `DESCRIPCION`) VALUES ('1', 'Inscripto');
-INSERT INTO `turnos01`.`tipopersona` (`ID`, `DESCRIPCION`) VALUES ('2', 'Beneficiario');
-
-/* Tipo Empleado*/
-INSERT INTO `turnos01`.`tipoempleado` (`ID`, `DESCRIPCION`) VALUES ('1', 'Recepcionista');
-INSERT INTO `turnos01`.`tipoempleado` (`ID`, `DESCRIPCION`) VALUES ('2', 'Operador de Atencion al Cliente');
-INSERT INTO `turnos01`.`tipoempleado` (`ID`, `DESCRIPCION`) VALUES ('3', 'Supervisor');
-
-/* Estado Turno*/
-INSERT INTO `turnos01`.`estadoturno` (`ID`, `NOMBRE`) VALUES ('1', 'En Espera');
-INSERT INTO `turnos01`.`estadoturno` (`ID`, `NOMBRE`) VALUES ('2', 'Para Atencion');
-INSERT INTO `turnos01`.`estadoturno` (`ID`, `NOMBRE`) VALUES ('3', 'Atendiendo');
-INSERT INTO `turnos01`.`estadoturno` (`ID`, `NOMBRE`) VALUES ('4', 'Turno Atendido');
-INSERT INTO `turnos01`.`estadoturno` (`ID`, `NOMBRE`) VALUES ('5', 'Baja');
-
-/* Organismo*/
-INSERT INTO `turnos01`.`organismo` (`ID`, `direccion`, `nombre`, `telefono`) VALUES ('1', 'Avenida Tacuary 2000', 'Sindicato de Camioneros', '3764-400205');
-
-/* Persona*/
-INSERT INTO `turnos01`.`persona` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_organismo`, `fk_tipo_persona`) VALUES ('1', 'Diaz', '41700375', 'Norberto', '1', '1');
-INSERT INTO `turnos01`.`persona` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_organismo`, `fk_tipo_persona`) VALUES ('2', 'Betancur', '41700375', 'Damian', '1', '2');
-INSERT INTO `turnos01`.`persona` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_organismo`, `fk_tipo_persona`) VALUES ('3', 'Correa', '41600375', 'Gabriel', '1', '1');
-INSERT INTO `turnos01`.`persona` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_organismo`, `fk_tipo_persona`) VALUES ('4', 'Cuella', '41091019', 'Santiago', '1', '2');
-
-/* Area*/
-INSERT INTO `turnos01`.`area` (`ID`, `nombre`, `numero`, `fk_organismo`) VALUES ('1', 'Contabilidad y Finanzas', '0001', '1');
-INSERT INTO `turnos01`.`area` (`ID`, `nombre`, `numero`, `fk_organismo`) VALUES ('2', 'Recursos Humanos', '0002', '1');
-INSERT INTO `turnos01`.`area` (`ID`, `nombre`, `numero`, `fk_organismo`) VALUES ('3', 'Prestamos', '0004', '1');
-INSERT INTO `turnos01`.`area` (`ID`, `nombre`, `numero`, `fk_organismo`) VALUES ('4', 'Direccion General', '0005', '1');
-INSERT INTO `turnos01`.`area` (`ID`, `nombre`, `numero`, `fk_organismo`) VALUES ('5', 'Recepcion', '0006', '1');
+/* Tipo de Empleado */
+INSERT INTO `tesoreria`.`tipoempleado` (`ID`, `DESCRIPCION`) VALUES 
+('1', 'Administrador de Sistemas'),
+('2', 'Empleado de Tesoreria');
 
 /* Empleado*/
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('1', 'Diaz', '27800277', 'Daniel', '1', '1', '3');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('2', 'Arias', '40335277', 'Agustina', '4', '1', '3');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('3', 'Brunaga', '43758956', 'Rosana', '2', '1', '2');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('4', 'Somoza', '30000000', 'Luis', '1', '1', '1');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('5', 'Arias', '37473945', 'Franco', '1', '1', '1');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('6', 'Batochi', '43758954', 'Daiana', '1', '1', '2');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('7', 'Cabrera', '39222935', 'Ezequiel', '1', '1', '2');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('8', 'Deleon', '39529908', 'Rocio', '1', '1', '2');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('9', 'Deolivera', '40040872', 'Camila', '1', '1', '3');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('10', 'Encina', '39226512', 'Gisel', '2', '1', '1');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('11', 'Escobar', '40337367', 'Pablo', '2', '1', '2');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('12', 'Fernandez', '40821767', 'Luciana', '2', '1', '2');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('13', 'Figueroa', '40336332', 'Pablo', '2', '1', '2');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('14', 'Garcia', '39043807', 'German', '2', '1', '3');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('15', 'Ibanez', '39426643', 'Samanta', '3', '1', '1');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('16', 'Lopez', '40335227', 'Solange', '3', '1', '2');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('17', 'Correa', '39222934', 'Ezequiel', '3', '1', '2');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('18', 'Bruzuela', '41700375', 'Roberto', '3', '1', '2');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('19', 'Duran', '41089964', 'Nandor', '3', '1', '3');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('20', 'Espindola', '40044203', 'Paula', '4', '1', '1');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('21', 'Galeano', '37159216', 'Gabriela', '4', '1', '2');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('22', 'Ferreira', '37169216', 'Javier', '4', '1', '2');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('23', 'Gentilezza', '48240186', 'Jonathan', '4', '1', '2');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('24', 'Godoy', '37801038', 'Valeria', '4', '1', '3');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('25', 'Lopez', '39528874', 'Jesica', '5', '1', '1');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('26', 'Montiel', '40791865', 'Marcelo', '5', '1', '2');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('27', 'Nuñez', '31330519', 'Pancho', '5', '1', '2');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('28', 'Rodriguez', '27675070', 'Angela', '5', '1', '2');
-INSERT INTO `turnos01`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_area`, `fk_organismo`, `fk_tipo_empleado`) VALUES ('29', 'Torres', '27607944', 'Lucas', '5', '1', '3');
+INSERT INTO `tesoreria`.`empleado` (`ID`, `APELLIDO`, `DNI`, `NOMBRE`, `fk_tipo_empleado`, `fk_empresa`) VALUES 
+('1', 'Betancur', '30.677.736', 'Damián Ariel', '2', '1'),
+('2', 'Iriarte', '33.000.000', 'Jose', '2', '1'),
+('3', 'Diaz', '34.000.000', 'Pablo', '2', '1');
 
+/* Tipo de Movimiento*/
+INSERT INTO `tesoreria`.`tipomovimiento` (`ID`, `DESCRIPCION`, `fk_empresa`) VALUES 
+('1', 'Credito', '1'),
+('2', 'Debito', '1');
 
+/* Tipo de Usuario*/
+INSERT INTO `tesoreria`.`tipo_usuario` (`ID`, `descripcion`) VALUES 
+('1', 'Empleado'),
+('2', 'Persona');
 
-
-/* Tipo Atencion*/
-INSERT INTO `turnos01`.`tipoatencion` (`ID`, `NOMBRE`, `PRIORIDAD`) VALUES ('1', 'Normal', '2');
-INSERT INTO `turnos01`.`tipoatencion` (`ID`, `NOMBRE`, `PRIORIDAD`) VALUES ('2', 'Anciano', '1');
-INSERT INTO `turnos01`.`tipoatencion` (`ID`, `NOMBRE`, `PRIORIDAD`) VALUES ('3', 'Embarazada', '1');
-INSERT INTO `turnos01`.`tipoatencion` (`ID`, `NOMBRE`, `PRIORIDAD`) VALUES ('4', 'Persona con menor de 2 años', '1');
-INSERT INTO `turnos01`.`tipoatencion` (`ID`, `NOMBRE`, `PRIORIDAD`) VALUES ('5', 'Persona con capacidad Reducida', '1');
-
-/* rel_Tipo_Tramite_area*/
-INSERT INTO `turnos01`.`rel_tipo_tramite_area` (`FK_Tipo_Tramite`, `FK_Area`) VALUES ('2', '1');
-INSERT INTO `turnos01`.`rel_tipo_tramite_area` (`FK_Tipo_Tramite`, `FK_Area`) VALUES ('3', '1');
-INSERT INTO `turnos01`.`rel_tipo_tramite_area` (`FK_Tipo_Tramite`, `FK_Area`) VALUES ('4', '1');
-INSERT INTO `turnos01`.`rel_tipo_tramite_area` (`FK_Tipo_Tramite`, `FK_Area`) VALUES ('5', '2');
-INSERT INTO `turnos01`.`rel_tipo_tramite_area` (`FK_Tipo_Tramite`, `FK_Area`) VALUES ('6', '2');
-INSERT INTO `turnos01`.`rel_tipo_tramite_area` (`FK_Tipo_Tramite`, `FK_Area`) VALUES ('7', '2');
-INSERT INTO `turnos01`.`rel_tipo_tramite_area` (`FK_Tipo_Tramite`, `FK_Area`) VALUES ('3', '3');
-INSERT INTO `turnos01`.`rel_tipo_tramite_area` (`FK_Tipo_Tramite`, `FK_Area`) VALUES ('8', '3');
-INSERT INTO `turnos01`.`rel_tipo_tramite_area` (`FK_Tipo_Tramite`, `FK_Area`) VALUES ('9', '4');
-INSERT INTO `turnos01`.`rel_tipo_tramite_area` (`FK_Tipo_Tramite`, `FK_Area`) VALUES ('10', '4');
-INSERT INTO `turnos01`.`rel_tipo_tramite_area` (`FK_Tipo_Tramite`, `FK_Area`) VALUES ('11', '5');
-
-
-
-/* rel_Tipo_Tramite_empleado*/
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('1', '2');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('1', '3');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('4', '3');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('4', '4');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('5', '2');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('5', '3');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('5', '4');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('6', '3');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('6', '4');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('7', '2');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('7', '4');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('8', '2');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('8', '3');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('8', '4');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('9', '3');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('3', '5');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('3', '6');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('10', '6');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('10', '7');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('11', '6');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('12', '5');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('12', '6');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('12', '7');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('13', '6');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('13', '7');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('14', '5');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('14', '7');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('15', '3');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('16', '8');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('17', '3');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('17', '8');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('18', '3');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('18', '8');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('19', '3');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('2', '9');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('20', '9');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('20', '10');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('21', '9');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('22', '10');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('23', '9');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('23', '10');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('24', '10');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('25', '11');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('26', '11');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('27', '11');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('28', '11');
-INSERT INTO `turnos01`.`rel_tipo_tramite_empleado` (`FK_Empleado`, `FK_Tipo_Tramite`) VALUES ('29', '11');
-
-
-
-/* Reuisito Obligatorio*/
-INSERT INTO `turnos01`.`requisitoobligatorio` (`ID`, `NOMBRE`) VALUES ('1', 'Fotocopia DNI');
-INSERT INTO `turnos01`.`requisitoobligatorio` (`ID`, `NOMBRE`) VALUES ('2', 'Libreta Matrimonio');
-INSERT INTO `turnos01`.`requisitoobligatorio` (`ID`, `NOMBRE`) VALUES ('3', 'Certificado de Defunción');
-INSERT INTO `turnos01`.`requisitoobligatorio` (`ID`, `NOMBRE`) VALUES ('4', 'Partida de Nacimiento');
-INSERT INTO `turnos01`.`requisitoobligatorio` (`ID`, `NOMBRE`) VALUES ('5', 'Certificado de Libre Deuda');
-
-
-/* Reuisito Opcional*/
-INSERT INTO `turnos01`.`requisitoopcional` (`ID`, `NOMBRE`) VALUES ('1', 'Constancia Antecedentes Penales');
-INSERT INTO `turnos01`.`requisitoopcional` (`ID`, `NOMBRE`) VALUES ('2', 'Fotocopia de Vacunas');
-INSERT INTO `turnos01`.`requisitoopcional` (`ID`, `NOMBRE`) VALUES ('3', 'Certificado de Buena Salud');
-INSERT INTO `turnos01`.`requisitoopcional` (`ID`, `NOMBRE`) VALUES ('4', 'Constancia de Alumno Regular');
-INSERT INTO `turnos01`.`requisitoopcional` (`ID`, `NOMBRE`) VALUES ('5', 'Certificado de Trabajo');
-
-/* Tipo Usuario*/
-INSERT INTO `turnos01`.`tipo_usuario` (`ID`, `descripcion`) VALUES ('1', 'Persona');
-INSERT INTO `turnos01`.`tipo_usuario` (`ID`, `descripcion`) VALUES ('2', 'Empleado');
-
-/* Usuario*/
-INSERT INTO `turnos01`.`usuario` (`ID`, `clave`, `nombre`, `id_tipoUsuario`, `id_Persona`) VALUES ('1', '12345', 'norberto', '1', '1');
-INSERT INTO `turnos01`.`usuario` (`ID`, `clave`, `nombre`, `id_tipoUsuario`, `id_Persona`) VALUES ('2', '12345', 'damian', '2', '2');
-INSERT INTO `turnos01`.`usuario` (`ID`, `clave`, `nombre`, `id_tipoUsuario`, `id_Empleado`) VALUES ('3', '12345', 'admin', '2', '1');
-
-/* relacion Tipo Tramite con requisito obligatorio */
-INSERT INTO `turnos01`.`tipotramite_requisitoobligatorio` (`TipoTramite_ID`, `requisitosObligatorios_ID`) VALUES ('1', '1');
-INSERT INTO `turnos01`.`tipotramite_requisitoobligatorio` (`TipoTramite_ID`, `requisitosObligatorios_ID`) VALUES ('1', '4');
-INSERT INTO `turnos01`.`tipotramite_requisitoobligatorio` (`TipoTramite_ID`, `requisitosObligatorios_ID`) VALUES ('1', '5');
-INSERT INTO `turnos01`.`tipotramite_requisitoobligatorio` (`TipoTramite_ID`, `requisitosObligatorios_ID`) VALUES ('2', '1');
-INSERT INTO `turnos01`.`tipotramite_requisitoobligatorio` (`TipoTramite_ID`, `requisitosObligatorios_ID`) VALUES ('2', '2');
-INSERT INTO `turnos01`.`tipotramite_requisitoobligatorio` (`TipoTramite_ID`, `requisitosObligatorios_ID`) VALUES ('2', '4');
-INSERT INTO `turnos01`.`tipotramite_requisitoobligatorio` (`TipoTramite_ID`, `requisitosObligatorios_ID`) VALUES ('3', '1');
-INSERT INTO `turnos01`.`tipotramite_requisitoobligatorio` (`TipoTramite_ID`, `requisitosObligatorios_ID`) VALUES ('3', '2');
-INSERT INTO `turnos01`.`tipotramite_requisitoobligatorio` (`TipoTramite_ID`, `requisitosObligatorios_ID`) VALUES ('3', '4');
-INSERT INTO `turnos01`.`tipotramite_requisitoobligatorio` (`TipoTramite_ID`, `requisitosObligatorios_ID`) VALUES ('4', '1');
-INSERT INTO `turnos01`.`tipotramite_requisitoobligatorio` (`TipoTramite_ID`, `requisitosObligatorios_ID`) VALUES ('4', '4');
-INSERT INTO `turnos01`.`tipotramite_requisitoobligatorio` (`TipoTramite_ID`, `requisitosObligatorios_ID`) VALUES ('4', '5');
-
-
-/* Horario Atencion Turno */
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('1', '08:00', '8', '0');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('2', '08:15', '8', '15');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('3', '08:30', '8', '30');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('4', '08:45', '8', '45');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('5', '09:00', '9', '0');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('6', '09:15', '9', '15');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('7', '09:30', '9', '30');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('8', '09:45', '9', '45');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('9', '10:00', '10', '0');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('10', '10:15', '10', '15');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('11', '10:30', '10', '30');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('12', '10:45', '10', '45');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('13', '11:00', '11', '0');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('14', '11:15', '11', '15');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('15', '11:30', '11', '30');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('16', '11:45', '11', '45');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('17', '16:00', '16', '0');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('18', '16:15', '16', '15');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('19', '16:30', '16', '30');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('20', '16:45', '16', '45');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('21', '17:00', '17', '0');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('22', '17:15', '17', '15');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('23', '17:30', '17', '30');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('24', '17:45', '17', '45');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('25', '18:00', '18', '0');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('26', '18:15', '18', '15');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('27', '18:30', '18', '30');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('28', '18:45', '18', '45');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('29', '19:00', '19', '0');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('30', '19:15', '19', '15');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('31', '19:30', '19', '30');
-INSERT INTO `turnos01`.`horarioatencionturno` (`ID`, `DESCRIPCION`, `HORA`, `MINUTO`) VALUES ('32', '19:45', '19', '45');
-
-
-
-
-
-
-
-
-
-
-/* Turno*/
-INSERT INTO `turnos01`.`turno` (`ID`, `FECHA`, `fk_area`, `fk_empleado`, `fk_estado_turno`, `fk_tipo_atencion`, `fk_Tipo_Tramite`, `fk_hora_turno`, `fk_persona`) VALUES ('1', '2020/01/08', '1', '1', '1', '1', '1', '1', '1');
-INSERT INTO `turnos01`.`turno` (`ID`, `FECHA`, `fk_area`, `fk_empleado`, `fk_estado_turno`, `fk_tipo_atencion`, `fk_Tipo_Tramite`, `fk_hora_turno`, `fk_persona`) VALUES ('2', '2020-01-15', '1', '1', '1', '1', '1', '1', '1');
-INSERT INTO `turnos01`.`turno` (`ID`, `FECHA`, `fk_area`, `fk_empleado`, `fk_estado_turno`, `fk_tipo_atencion`, `fk_Tipo_Tramite`, `fk_hora_turno`, `fk_persona`) VALUES ('3', '2020-01-15', '1', '1', '1', '1', '1', '2', '1');
-INSERT INTO `turnos01`.`turno` (`ID`, `FECHA`, `fk_area`, `fk_empleado`, `fk_estado_turno`, `fk_tipo_atencion`, `fk_Tipo_Tramite`, `fk_hora_turno`, `fk_persona`) VALUES ('4', '2020-01-15', '1', '1', '1', '1', '1', '3', '1');
-INSERT INTO `turnos01`.`turno` (`ID`, `FECHA`, `fk_area`, `fk_empleado`, `fk_estado_turno`, `fk_tipo_atencion`, `fk_Tipo_Tramite`, `fk_hora_turno`, `fk_persona`) VALUES ('5', '2020-01-15', '1', '1', '1', '1', '1', '4', '1');
-INSERT INTO `turnos01`.`turno` (`ID`, `FECHA`, `fk_area`, `fk_empleado`, `fk_estado_turno`, `fk_tipo_atencion`, `fk_Tipo_Tramite`, `fk_hora_turno`, `fk_persona`) VALUES ('6', '2020-01-15', '1', '1', '1', '1', '1', '5', '1');
-INSERT INTO `turnos01`.`turno` (`ID`, `FECHA`, `fk_area`, `fk_empleado`, `fk_estado_turno`, `fk_tipo_atencion`, `fk_Tipo_Tramite`, `fk_hora_turno`, `fk_persona`) VALUES ('7', '2020-01-15', '1', '1', '1', '1', '1', '6', '1');
-INSERT INTO `turnos01`.`turno` (`ID`, `FECHA`, `fk_area`, `fk_empleado`, `fk_estado_turno`, `fk_tipo_atencion`, `fk_Tipo_Tramite`, `fk_hora_turno`, `fk_persona`) VALUES ('8', '2020-01-15', '1', '1', '1', '1', '1', '7', '1');
-INSERT INTO `turnos01`.`turno` (`ID`, `FECHA`, `fk_area`, `fk_empleado`, `fk_estado_turno`, `fk_tipo_atencion`, `fk_Tipo_Tramite`, `fk_hora_turno`, `fk_persona`) VALUES ('9', '2020-01-15', '1', '1', '1', '1', '1', '8', '1');
-
-
-
-/* Tramite*/
-INSERT INTO `turnos01`.`tramite` (`ID`, `FECHA`, `HORA`, `fk_area`, `fk_Tipo_Tramite`, `fk_Turno`) VALUES ('1', '2020/01/08', '16:42:00', '1', '1', '1');
+/* Usuarios*/
+INSERT INTO `tesoreria`.`usuario` (`ID`, `clave`, `nombre`, `id_tipoUsuario`, `id_Empleado`) VALUES 
+('1', '12345', 'damian', '1', '1'),
+('2', '12345', 'jose', '1', '2'),
+('3', '12345', 'pablo', '1', '3');
 
 
 

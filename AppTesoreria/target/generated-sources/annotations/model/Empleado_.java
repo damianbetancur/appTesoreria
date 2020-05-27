@@ -1,25 +1,20 @@
 package model;
 
 import javax.annotation.Generated;
-import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
-import model.Area;
-import model.Organismo;
+import model.Empresa;
 import model.TipoEmpleado;
-import model.TipoTramite;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-05-26T00:13:53")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-05-26T19:32:23")
 @StaticMetamodel(Empleado.class)
 public class Empleado_ { 
 
     public static volatile SingularAttribute<Empleado, String> apellido;
     public static volatile SingularAttribute<Empleado, Long> id;
-    public static volatile SingularAttribute<Empleado, Area> unAreaA;
+    public static volatile SingularAttribute<Empleado, Empresa> unaEmpresaE;
     public static volatile SingularAttribute<Empleado, String> nombre;
-    public static volatile ListAttribute<Empleado, TipoTramite> tipoTramite;
     public static volatile SingularAttribute<Empleado, String> dni;
-    public static volatile SingularAttribute<Empleado, Organismo> unOrganismoC;
     public static volatile SingularAttribute<Empleado, TipoEmpleado> unTipoEmpleado;
 
 }

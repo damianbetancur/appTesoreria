@@ -5,21 +5,17 @@
  */
 package controller;
 
-import dao.AreaJpaController;
 import dao.Conexion;
 import dao.EmpleadoJpaController;
 import dao.TipoEmpleadoJpaController;
-import dao.TurnoJpaController;
 import dao.UsuarioJpaController;
 import dao.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-import model.Area;
 import model.Empleado;
-import model.Organismo;
+import model.Empresa;
 import model.TipoEmpleado;
-import model.Turno;
 import model.Usuario;
 
 /**
@@ -31,22 +27,18 @@ public class EmpleadoController {
     //DAO
     private final EmpleadoJpaController empleadoDAO;
     private final TipoEmpleadoJpaController tipoEmpleadoDAO;
-    private final AreaJpaController areaDAO;
 
     private final UsuarioJpaController usuarioDAO;
-    private final TurnoJpaController turnoDAO;
 
     //Model
-    private static Organismo organismoInstanciaUnica;
+    private static Empresa empresaInstanciaUnica;
 
     public EmpleadoController() {
-        this.organismoInstanciaUnica = LoginController.getInstanceOrganismo();
+        this.empresaInstanciaUnica = LoginController.getInstanceEmpresa();
 
         this.empleadoDAO = new EmpleadoJpaController(Conexion.getEmf());
         this.tipoEmpleadoDAO = new TipoEmpleadoJpaController(Conexion.getEmf());
         this.usuarioDAO = new UsuarioJpaController(Conexion.getEmf());
-        this.turnoDAO = new TurnoJpaController(Conexion.getEmf());
-        this.areaDAO = new AreaJpaController(Conexion.getEmf());
     }
 
     public boolean agregarEmpleado(Empleado nuevoEmpleado) {
@@ -59,7 +51,6 @@ public class EmpleadoController {
         }
 
         if (dniPermitido) {
-            nuevoEmpleado.setUnOrganismoC(organismoInstanciaUnica);
             empleadoDAO.create(nuevoEmpleado);
         }
         return dniPermitido;
@@ -68,8 +59,7 @@ public class EmpleadoController {
     public boolean modificarEmpleado(Empleado actualEmpleado, Empleado nuevoEmpleado) throws Exception {
         //verifica que el dni sea unico
         nuevoEmpleado.setId(actualEmpleado.getId());
-        nuevoEmpleado.setUnOrganismoC(organismoInstanciaUnica);
-        nuevoEmpleado.getUnAreaA().setId(actualEmpleado.getUnAreaA().getId());
+        nuevoEmpleado.setUnaEmpresaE(empresaInstanciaUnica);
         boolean dniPermitido = true;
         if (actualEmpleado.getDni().equals(nuevoEmpleado.getDni())) {
             empleadoDAO.edit(nuevoEmpleado);
@@ -119,14 +109,7 @@ public class EmpleadoController {
         }
         return tiposEmpleadosEncontrados;
     }
-    
-    public Vector<Area> buscarTodasLasAreas() {
-        Vector<Area> areasEncontradas = new Vector<>();
-        for (Area areaRecorrido : areaDAO.findAreaEntities()) {
-            areasEncontradas.add(areaRecorrido);
-        }
-        return areasEncontradas;
-    }
+       
 
     private boolean verificarEliminarEmpleado(Empleado empleadoAEliminar) {
         boolean estadoEliminacionUsuario = true;
@@ -136,11 +119,7 @@ public class EmpleadoController {
                 estadoEliminacionUsuario = false;
             }
         }
-        for (Turno turnoRecorrido : turnoDAO.findTurnoEntities()) {
-            if (empleadoAEliminar.getId().equals(turnoRecorrido.getUnaPersona().getId())) {
-                estadoEliminacionUsuario = false;
-            }
-        }
+       
         return estadoEliminacionUsuario;
     }
 }

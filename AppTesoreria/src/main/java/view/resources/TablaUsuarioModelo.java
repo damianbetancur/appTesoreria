@@ -5,7 +5,6 @@
  */
 package view.resources;
 
-import model.Persona;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -17,7 +16,7 @@ import model.Usuario;
  */
 public class TablaUsuarioModelo extends AbstractTableModel {
 
-    private static final String[] COLUMNAS = {"N°", "NickName", "Persona Asociada", "Empleado Asociado", "Tipo Usuario"};
+    private static final String[] COLUMNAS = {"N°", "NickName", "Empleado Asociado", "Tipo Usuario"};
     private List<Usuario> usuarios;
 
     public TablaUsuarioModelo() {
@@ -31,7 +30,7 @@ public class TablaUsuarioModelo extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 3;
     }
 
     @Override
@@ -46,14 +45,8 @@ public class TablaUsuarioModelo extends AbstractTableModel {
             case 1:
                 retorno = usuario.getNombre();
                 break;
+            
             case 2:
-                if (usuario.getUnaPersona()!=null) {
-                    retorno = usuario.getUnaPersona().getDni();
-                }else{
-                    retorno ="Sin Asignar";
-                }
-                break;
-            case 3:
                 if (usuario.getUnEmpleado() != null) {
                     retorno = usuario.getUnEmpleado().getDni();
                 }else{
@@ -61,7 +54,7 @@ public class TablaUsuarioModelo extends AbstractTableModel {
                 }
 
                 break;
-            case 4:
+            case 3:
                 if (usuario.getUnEmpleado() != null) {
                     retorno = usuario.getTipoUsuario().getDescripcion();
                 }

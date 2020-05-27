@@ -6,15 +6,11 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 /**
@@ -34,27 +30,14 @@ public class Empleado implements Serializable {
     private String dni;
 
     @ManyToOne
-    @JoinColumn(name = "fk_organismo")
-    private Organismo unOrganismoC;
+    @JoinColumn(name = "fk_empresa")
+    private Empresa unaEmpresaE;
 
     @ManyToOne
     @JoinColumn(name = "fk_tipo_empleado")
     private TipoEmpleado unTipoEmpleado;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_area", nullable = false, updatable = true)
-    private Area unAreaA;
-
-    @JoinTable(
-            name = "rel_Tipo_Tramite_Empleado",
-            joinColumns = @JoinColumn(name = "FK_Empleado"),
-            inverseJoinColumns = @JoinColumn(name = "FK_Tipo_Tramite")
-    )
-    @ManyToMany
-    private List<TipoTramite> tipoTramite;
-
     public Empleado() {
-        this.tipoTramite= new ArrayList<>();
     }
 
     public Long getId() {
@@ -114,14 +97,6 @@ public class Empleado implements Serializable {
         this.dni = dni;
     }
 
-    public Organismo getUnOrganismoC() {
-        return unOrganismoC;
-    }
-
-    public void setUnOrganismoC(Organismo unOrganismoC) {
-        this.unOrganismoC = unOrganismoC;
-    }
-
     public TipoEmpleado getUnTipoEmpleado() {
         return unTipoEmpleado;
     }
@@ -130,22 +105,12 @@ public class Empleado implements Serializable {
         this.unTipoEmpleado = unTipoEmpleado;
     }
 
-    public Area getUnAreaA() {
-        return unAreaA;
+    public Empresa getUnaEmpresaE() {
+        return unaEmpresaE;
     }
 
-    public void setUnAreaA(Area unAreaA) {
-        this.unAreaA = unAreaA;
+    public void setUnaEmpresaE(Empresa unaEmpresaE) {
+        this.unaEmpresaE = unaEmpresaE;
     }
 
-    public List<TipoTramite> getTipoTramite() {
-        return tipoTramite;
-    }
-
-    public void setTipoTramite(List<TipoTramite> tipoTramite) {
-        this.tipoTramite = tipoTramite;
-    }
-
-    
-    
 }

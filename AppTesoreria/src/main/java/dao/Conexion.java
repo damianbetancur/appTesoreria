@@ -25,7 +25,7 @@ public class Conexion {
 
     private static void conectar() {
         if (em == null) {
-            Conexion.emf = Persistence.createEntityManagerFactory("com.mycompany_GestorTurno10_jar_1.0-SNAPSHOTPU");
+            Conexion.emf = Persistence.createEntityManagerFactory("com.mycompany_AppTesoreria_jar_1.0-SNAPSHOTPU");
             Conexion.em = Conexion.emf.createEntityManager();
         }
     }

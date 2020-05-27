@@ -6,41 +6,33 @@
 package model;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 /**
  *
  * @author Ariel
  */
 @Entity
-@Table(name = "USUARIO")
-public class Usuario implements Serializable {
+public class TipoMovimiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "nombre")
-    private String nombre;
-
-    @Column(name = "clave")
-    private String clave;
-
+    private String descripcion;
+    
     @ManyToOne
-    @JoinColumn(name = "id_tipoUsuario")
-    private TipoUsuario tipoUsuario;
+    @JoinColumn(name = "fk_empresa")
+    private Empresa unaEmpresaTM;
 
-    @ManyToOne
-    @JoinColumn(name = "id_Empleado")
-    private Empleado unEmpleado;
+    public TipoMovimiento() {
+    }
 
     public Long getId() {
         return id;
@@ -60,10 +52,10 @@ public class Usuario implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
+        if (!(object instanceof TipoMovimiento)) {
             return false;
         }
-        Usuario other = (Usuario) object;
+        TipoMovimiento other = (TipoMovimiento) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -72,39 +64,24 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Usuario[ id=" + id + " ]";
+        return "model.TipoMovimiento[ id=" + id + " ]";
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public String getClave() {
-        return clave;
+    public Empresa getUnaEmpresaTM() {
+        return unaEmpresaTM;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setUnaEmpresaTM(Empresa unaEmpresaTM) {
+        this.unaEmpresaTM = unaEmpresaTM;
     }
 
-    public TipoUsuario getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(TipoUsuario tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
-    public Empleado getUnEmpleado() {
-        return unEmpleado;
-    }
-
-    public void setUnEmpleado(Empleado unEmpleado) {
-        this.unEmpleado = unEmpleado;
-    }
-
+    
 }

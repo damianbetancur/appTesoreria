@@ -17,13 +17,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Empleado;
-import model.Persona;
 import model.Usuario;
 import view.resources.TablaEmpleadoUsuarioModelListener;
 import view.resources.TablaEmpleadoModelo;
-import view.resources.TablaPersonaModelListener;
-import view.resources.TablaPersonaModelo;
-import view.resources.TablaPersonaUsuarioModelListener;
 import view.resources.TablaUsuarioModelListener;
 import view.resources.TablaUsuarioModelo;
 
@@ -37,8 +33,6 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
 
     //variables de tabla
     private final TablaUsuarioModelo tablaUsuarioModelo;
-
-    private final TablaPersonaModelo tablaPersonaModelo;
 
     private final TablaEmpleadoModelo tablaEmpleadoModelo;
 
@@ -55,8 +49,6 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
     public PanelUsuario() {
         //JTable vacio
         this.tablaUsuarioModelo = new TablaUsuarioModelo();
-
-        this.tablaPersonaModelo = new TablaPersonaModelo();
 
         this.tablaEmpleadoModelo = new TablaEmpleadoModelo();
 
@@ -79,8 +71,6 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
         this.jtb_usuario.getSelectionModel().addListSelectionListener(new TablaUsuarioModelListener(this));
 
         this.jtb_empleadoAsociado.getSelectionModel().addListSelectionListener(new TablaEmpleadoUsuarioModelListener(this));
-
-        this.jtb_personaAsociada.getSelectionModel().addListSelectionListener(new TablaPersonaUsuarioModelListener(this));
 
         limpiarTodosLosCampos();
 
@@ -113,7 +103,6 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
         jLabel1 = new javax.swing.JLabel();
         jtf_nickname = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jbtn_modificar = new javax.swing.JButton();
         jbtn_aceptar = new javax.swing.JButton();
@@ -122,20 +111,11 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
         jlbl_alertaNickName = new javax.swing.JLabel();
         jlbl_alertaPassword = new javax.swing.JLabel();
         jlbl_alertaPersonaAsociada = new javax.swing.JLabel();
-        jtf_personaAsociada = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jtf_empleadoAsociado = new javax.swing.JTextField();
         jpf_confirmarPassword = new javax.swing.JPasswordField();
         jpf_password = new javax.swing.JPasswordField();
         jlbl_alertaEmpleadoAsociado = new javax.swing.JLabel();
-        jPanelPersonaAsociada = new javax.swing.JPanel();
-        jScrollPanePersonaAsociada = new javax.swing.JScrollPane();
-        jtb_personaAsociada = new javax.swing.JTable();
-        jbtn_listarPersona = new javax.swing.JButton();
-        jbtn_asignarPersona = new javax.swing.JButton();
-        jbtn_volverADatosDeUsuarioPersona = new javax.swing.JButton();
-        jbtn_desasignarPersona = new javax.swing.JButton();
-        jtf_buscarPersona = new javax.swing.JTextField();
         jPanelEmpleadoAsociado = new javax.swing.JPanel();
         jScrollPaneEmpleadoAsociado = new javax.swing.JScrollPane();
         jtb_empleadoAsociado = new javax.swing.JTable();
@@ -243,9 +223,6 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("PASSWORD");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("DNI PERSONA ASOCIADA");
-
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("CONFIRMAR PASSWORD");
 
@@ -273,15 +250,6 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
         jlbl_alertaPassword.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jlbl_alertaPersonaAsociada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        jtf_personaAsociada.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jtf_personaAsociada.setEnabled(false);
-        jtf_personaAsociada.setFocusable(false);
-        jtf_personaAsociada.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jtf_personaAsociadaMousePressed(evt);
-            }
-        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("DNI EMPLEADO ASOCIADO");
@@ -326,10 +294,6 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(jpf_password))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_datosLayout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtf_personaAsociada))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_datosLayout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jpf_confirmarPassword))
@@ -369,16 +333,17 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jpf_confirmarPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlbl_alertaConfirmarPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
                 .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtf_personaAsociada, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlbl_alertaPersonaAsociada, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlbl_alertaEmpleadoAsociado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtf_empleadoAsociado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_datosLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jlbl_alertaPersonaAsociada, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jlbl_alertaEmpleadoAsociado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_datosLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtf_empleadoAsociado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(20, 20, 20)
                 .addComponent(jlbl_mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -391,100 +356,6 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
         );
 
         jTabbedPaneContenedor.addTab("Datos de Usuario", jPanel_datos);
-
-        jPanelPersonaAsociada.setEnabled(false);
-
-        jtb_personaAsociada.setModel(tablaPersonaModelo);
-        jScrollPanePersonaAsociada.setViewportView(jtb_personaAsociada);
-
-        jbtn_listarPersona.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jbtn_listarPersona.setText("LISTAR");
-        jbtn_listarPersona.setEnabled(false);
-        jbtn_listarPersona.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtn_listarPersonaActionPerformed(evt);
-            }
-        });
-
-        jbtn_asignarPersona.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jbtn_asignarPersona.setText("ASIGNAR");
-        jbtn_asignarPersona.setEnabled(false);
-        jbtn_asignarPersona.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtn_asignarPersonaActionPerformed(evt);
-            }
-        });
-
-        jbtn_volverADatosDeUsuarioPersona.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jbtn_volverADatosDeUsuarioPersona.setText("VOLVER A DATOS DE USUARIO");
-        jbtn_volverADatosDeUsuarioPersona.setEnabled(false);
-        jbtn_volverADatosDeUsuarioPersona.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtn_volverADatosDeUsuarioPersonaActionPerformed(evt);
-            }
-        });
-
-        jbtn_desasignarPersona.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jbtn_desasignarPersona.setText("DESASIGNAR");
-        jbtn_desasignarPersona.setEnabled(false);
-        jbtn_desasignarPersona.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtn_desasignarPersonaActionPerformed(evt);
-            }
-        });
-
-        jtf_buscarPersona.setEnabled(false);
-        jtf_buscarPersona.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jtf_buscarPersonaFocusGained(evt);
-            }
-        });
-        jtf_buscarPersona.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtf_buscarPersonaKeyReleased(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelPersonaAsociadaLayout = new javax.swing.GroupLayout(jPanelPersonaAsociada);
-        jPanelPersonaAsociada.setLayout(jPanelPersonaAsociadaLayout);
-        jPanelPersonaAsociadaLayout.setHorizontalGroup(
-            jPanelPersonaAsociadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelPersonaAsociadaLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanelPersonaAsociadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelPersonaAsociadaLayout.createSequentialGroup()
-                        .addComponent(jbtn_listarPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jtf_buscarPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(jbtn_asignarPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jbtn_desasignarPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPersonaAsociadaLayout.createSequentialGroup()
-                        .addComponent(jScrollPanePersonaAsociada, javax.swing.GroupLayout.DEFAULT_SIZE, 905, Short.MAX_VALUE)
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPersonaAsociadaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jbtn_volverADatosDeUsuarioPersona, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanelPersonaAsociadaLayout.setVerticalGroup(
-            jPanelPersonaAsociadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelPersonaAsociadaLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPanePersonaAsociada, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addGroup(jPanelPersonaAsociadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbtn_listarPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtf_buscarPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtn_asignarPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtn_desasignarPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(jbtn_volverADatosDeUsuarioPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jTabbedPaneContenedor.addTab("Persona Asociada", jPanelPersonaAsociada);
 
         jPanelEmpleadoAsociado.setEnabled(false);
 
@@ -632,11 +503,11 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
     }//GEN-LAST:event_jbtn_volverActionPerformed
 
     /**
-     * Controla el boton cancelar
+     * Controla el boton Listar
      *
      * @param evt
      */
-    private void jbtn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_cancelarActionPerformed
+    private void jbtn_listarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_listarActionPerformed
         //Actualizar el TableModel con la lista del controlador
         this.tablaUsuarioModelo.setUsuarios(this.controlador.buscarTodosLosUsuarios());
 
@@ -653,41 +524,226 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
 
         this.usuarioSeleccionado = null;
 
+        this.jTabbedPaneContenedor.setSelectedIndex(0);
+
         this.jtb_usuario.setEnabled(true);
 
-        this.jlbl_alertaNickName.setIcon(null);
-        this.jlbl_alertaPassword.setIcon(null);
-        this.jlbl_alertaConfirmarPassword.setIcon(null);
-        this.jlbl_alertaPersonaAsociada.setIcon(null);
-        this.jlbl_alertaEmpleadoAsociado.setIcon(null);
-
-        this.jlbl_mensaje.setText("");
         this.crud = "buscar";
-    }//GEN-LAST:event_jbtn_cancelarActionPerformed
+
+    }//GEN-LAST:event_jbtn_listarActionPerformed
 
     /**
-     * Controla el boton modificar
+     * Controla el boton agregar
      *
      * @param evt
      */
-    private void jbtn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_modificarActionPerformed
-        this.crud = "modificar";
+    private void jbtn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_agregarActionPerformed
+        this.usuarioSeleccionado = new Usuario();
+        Empleado nuevoEmpleadoAsociado = new Empleado();
+        usuarioSeleccionado.setUnEmpleado(nuevoEmpleadoAsociado);
+
+        this.crud = "agregar";
         habilitarTodosLosBotones(false);
         habilitarTodosLosCampos(true);
+        jtf_nickname.setEnabled(true);
+        jtf_nickname.requestFocus();
+
+        jtf_buscarEmpleado.setEnabled(true);
+
+        this.validador.limpiarCampo(this.jtf_nickname);
+        this.validador.limpiarCampo(this.jtf_empleadoAsociado);
+        this.validador.limpiarCampo(this.jtf_buscarUsuario);
+        this.jpf_password.setText("");
+        this.jpf_confirmarPassword.setText("");
+
+        this.jtf_empleadoAsociado.setEnabled(false);
         this.validador.habilitarBoton(false, this.jbtn_listar, new Color(30, 132, 73), Color.WHITE, null, null);
         this.validador.habilitarBoton(true, this.jbtn_aceptar, new Color(30, 132, 73), Color.WHITE, null, null);
         this.validador.habilitarBoton(true, this.jbtn_cancelar, Color.red, Color.WHITE, null, null);
         this.validador.habilitarBoton(false, this.jbtn_agregar, new Color(30, 132, 73), Color.WHITE, null, null);
         this.validador.habilitarCampo(false, this.jtf_buscarUsuario);
 
+        this.validador.habilitarBoton(true, this.jbtn_listarEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
+
         this.jtb_usuario.setEnabled(false);
 
         this.jTabbedPaneContenedor.setSelectedIndex(0);
-        this.jbtn_volverADatosDeUsuarioPersona.setEnabled(false);
-        this.jbtn_volverADatosDeUsuarioPersona.setEnabled(false);
 
 
-    }//GEN-LAST:event_jbtn_modificarActionPerformed
+    }//GEN-LAST:event_jbtn_agregarActionPerformed
+
+    /**
+     * Controla el Foco del JTextFiel buscar persona
+     *
+     * @param evt
+     */
+    private void jtf_buscarUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_buscarUsuarioFocusGained
+        if (this.jtf_buscarUsuario.isEditable()) {
+            this.tablaUsuarioModelo.setUsuarios(this.controlador.buscarTodosLosUsuarios());
+
+            //Refrescar el modelo en la tabla
+            this.tablaUsuarioModelo.fireTableDataChanged();
+
+            limpiarTodosLosCampos();
+            habilitarTodosLosCampos(false);
+            habilitarTodosLosBotones(false);
+
+            this.validador.habilitarBoton(true, this.jbtn_agregar, new Color(30, 132, 73), Color.WHITE, null, null);
+            this.validador.habilitarBoton(true, this.jbtn_listar, new Color(30, 132, 73), Color.WHITE, null, null);
+            this.validador.habilitarCampo(true, this.jtf_buscarUsuario);
+
+            this.usuarioSeleccionado = null;
+
+            this.jtb_usuario.setEnabled(true);
+
+            this.jlbl_alertaNickName.setIcon(null);
+            this.jlbl_alertaPassword.setIcon(null);
+            this.jlbl_alertaConfirmarPassword.setIcon(null);
+            this.jlbl_alertaPersonaAsociada.setIcon(null);
+            this.jlbl_alertaEmpleadoAsociado.setIcon(null);
+            this.jTabbedPaneContenedor.setSelectedIndex(0);
+
+        }
+    }//GEN-LAST:event_jtf_buscarUsuarioFocusGained
+
+    /**
+     * @param evt
+     */
+    private void jtf_buscarUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_buscarUsuarioKeyReleased
+        if (this.jtf_buscarUsuario.isEditable()) {
+            //Actualizar el TableModel con la lista del controlador
+            this.tablaUsuarioModelo.setUsuarios(this.controlador.buscarUsuariosPorNickName(this.jtf_buscarUsuario.getText()));
+
+            //Refrescar el modelo en la tabla
+            this.tablaUsuarioModelo.fireTableDataChanged();
+        }
+    }//GEN-LAST:event_jtf_buscarUsuarioKeyReleased
+
+    private void jbtn_volverADatosDeUsuarioEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_volverADatosDeUsuarioEmpleadoActionPerformed
+
+        if (this.crud.equals("agregar")) {
+            this.jTabbedPaneContenedor.setSelectedIndex(0);
+            this.validador.habilitarBoton(false, this.jbtn_volverADatosDeUsuarioEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
+        }
+
+        if (this.crud.equals("buscar")) {
+            this.jTabbedPaneContenedor.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_jbtn_volverADatosDeUsuarioEmpleadoActionPerformed
+
+    private void jbtn_desasignarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_desasignarEmpleadoActionPerformed
+        if (this.crud.equals("agregar")) {
+            int opcion = 0;
+            opcion = JOptionPane.showConfirmDialog(this, "Realmente Desasociar al Empleado", "Confirmar Desasociación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (opcion == 0) {
+                this.jTabbedPaneContenedor.setSelectedIndex(0);
+                this.validador.habilitarBoton(false, this.jbtn_volverADatosDeUsuarioEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
+                this.usuarioSeleccionado.setUnEmpleado(new Empleado());
+                this.jtf_empleadoAsociado.setText("");
+
+            }
+        }
+    }//GEN-LAST:event_jbtn_desasignarEmpleadoActionPerformed
+
+    private void jbtn_asignarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_asignarEmpleadoActionPerformed
+
+        if (this.crud.equals("agregar")) {
+            int opcion = 0;
+            opcion = JOptionPane.showConfirmDialog(this, "Realmente Asociar al Empleado", "Confirmar Asociación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (opcion == 0) {
+                this.jTabbedPaneContenedor.setSelectedIndex(0);
+                this.validador.habilitarBoton(false, this.jbtn_volverADatosDeUsuarioEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
+
+                int filaSeleccionada = this.jtb_empleadoAsociado.getSelectedRow();
+                this.usuarioSeleccionado.setUnEmpleado(this.tablaEmpleadoModelo.obtenerEmpleadoEn(filaSeleccionada));
+                this.jtf_empleadoAsociado.setText(this.usuarioSeleccionado.getUnEmpleado().getDni());
+
+            } else {
+                //Actualizar el TableModel con la lista del controlador
+                this.tablaEmpleadoModelo.setEmpleados(this.controlador.buscarTodosLosEmpleados());
+                //Refrescar el modelo en la tabla
+                this.tablaEmpleadoModelo.fireTableDataChanged();
+                this.validador.habilitarCampo(true, this.jtf_buscarEmpleado);
+                this.jtf_buscarEmpleado.setText("");
+                this.jtf_buscarEmpleado.setEnabled(true);
+            }
+        }
+    }//GEN-LAST:event_jbtn_asignarEmpleadoActionPerformed
+
+    private void jtf_buscarEmpleadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_buscarEmpleadoKeyReleased
+        if (this.jtf_buscarEmpleado.isEditable()) {
+            //Actualizar el TableModel con la lista del controlador
+            this.tablaEmpleadoModelo.setEmpleados(this.controlador.buscarEmpleadoDeUsuarioPorDNI(this.jtf_buscarEmpleado.getText()));
+
+            //Refrescar el modelo en la tabla
+            this.tablaEmpleadoModelo.fireTableDataChanged();
+        }
+    }//GEN-LAST:event_jtf_buscarEmpleadoKeyReleased
+
+    private void jtf_buscarEmpleadoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_buscarEmpleadoFocusGained
+        if (this.jtf_buscarEmpleado.isEditable()) {
+            this.tablaEmpleadoModelo.setEmpleados(this.controlador.buscarTodosLosEmpleados());
+            this.jtf_buscarEmpleado.setText("");
+            //Refrescar el modelo en la tabla
+            this.tablaEmpleadoModelo.fireTableDataChanged();
+
+        }
+    }//GEN-LAST:event_jtf_buscarEmpleadoFocusGained
+
+    private void jbtn_listarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_listarEmpleadoActionPerformed
+        //Actualizar el TableModel con la lista del controlador
+        this.tablaEmpleadoModelo.setEmpleados(this.controlador.buscarTodosLosEmpleados());
+
+        //Refrescar el modelo en la tabla
+        this.tablaEmpleadoModelo.fireTableDataChanged();
+
+        this.validador.habilitarCampo(true, this.jtf_buscarEmpleado);
+
+        if (this.crud.equals("agregar")) {
+            this.jtf_buscarEmpleado.setText("");
+            this.jtf_buscarEmpleado.setEnabled(true);
+        }
+    }//GEN-LAST:event_jbtn_listarEmpleadoActionPerformed
+
+    private void jtf_empleadoAsociadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtf_empleadoAsociadoMousePressed
+        if (this.usuarioSeleccionado != null) {
+            if (this.usuarioSeleccionado.getUnEmpleado() != null) {
+                this.jTabbedPaneContenedor.setSelectedIndex(1);
+                this.validador.habilitarBoton(true, this.jbtn_volverADatosDeUsuarioEmpleado, new Color(255, 255, 0), Color.BLACK, null, null);
+
+                //Actualizar el TableModel con la lista del controlador
+                this.tablaEmpleadoModelo.setEmpleados(null);
+
+                //Refrescar el modelo en la tabla
+                this.tablaEmpleadoModelo.fireTableDataChanged();
+
+                if (this.crud.equals("agregar")) {
+                    if (this.usuarioSeleccionado.getUnEmpleado().getId() != null) {
+                        this.tablaEmpleadoModelo.setEmpleados(this.controlador.buscarTodosLosEmpleados());
+                        //Refrescar el modelo en la tabla
+                        this.tablaEmpleadoModelo.fireTableDataChanged();
+                        this.jtb_empleadoAsociado.changeSelection(this.tablaEmpleadoModelo.buscarFilaEmpleado(this.usuarioSeleccionado.getUnEmpleado()) - 1, 1, false, false);
+
+                        this.validador.habilitarBoton(true, this.jbtn_desasignarEmpleado, Color.RED, Color.WHITE, null, null);
+                    } else {
+                        this.jtf_buscarEmpleado.setText("");
+                        this.jtf_buscarEmpleado.setEnabled(false);
+                        this.jtb_empleadoAsociado.setEnabled(true);
+                    }
+
+                }
+                if (this.crud.equals("buscar")) {
+                    this.tablaEmpleadoModelo.setEmpleados(this.controlador.buscarTodosLosEmpleados());
+                    this.jtb_empleadoAsociado.setEnabled(false);
+                    //Refrescar el modelo en la tabla
+                    this.tablaEmpleadoModelo.fireTableDataChanged();
+                    this.jtb_empleadoAsociado.changeSelection(this.tablaEmpleadoModelo.buscarFilaEmpleado(this.usuarioSeleccionado.getUnEmpleado()) - 1, 1, false, false);
+                    this.validador.habilitarBoton(false, this.jbtn_asignarEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
+                    this.validador.habilitarBoton(false, this.jbtn_desasignarEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
+                }
+            }
+        }
+    }//GEN-LAST:event_jtf_empleadoAsociadoMousePressed
 
     /**
      * Controla el boton aceptar si se presiono el boton agregar, llama a la
@@ -808,15 +864,35 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
             }
         }
 
-
     }//GEN-LAST:event_jbtn_aceptarActionPerformed
 
     /**
-     * Controla el boton Listar
+     * Controla el boton modificar
      *
      * @param evt
      */
-    private void jbtn_listarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_listarActionPerformed
+    private void jbtn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_modificarActionPerformed
+        this.crud = "modificar";
+        habilitarTodosLosBotones(false);
+        habilitarTodosLosCampos(true);
+        this.validador.habilitarBoton(false, this.jbtn_listar, new Color(30, 132, 73), Color.WHITE, null, null);
+        this.validador.habilitarBoton(true, this.jbtn_aceptar, new Color(30, 132, 73), Color.WHITE, null, null);
+        this.validador.habilitarBoton(true, this.jbtn_cancelar, Color.red, Color.WHITE, null, null);
+        this.validador.habilitarBoton(false, this.jbtn_agregar, new Color(30, 132, 73), Color.WHITE, null, null);
+        this.validador.habilitarCampo(false, this.jtf_buscarUsuario);
+
+        this.jtb_usuario.setEnabled(false);
+
+        this.jTabbedPaneContenedor.setSelectedIndex(0);
+
+    }//GEN-LAST:event_jbtn_modificarActionPerformed
+
+    /**
+     * Controla el boton cancelar
+     *
+     * @param evt
+     */
+    private void jbtn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_cancelarActionPerformed
         //Actualizar el TableModel con la lista del controlador
         this.tablaUsuarioModelo.setUsuarios(this.controlador.buscarTodosLosUsuarios());
 
@@ -833,112 +909,17 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
 
         this.usuarioSeleccionado = null;
 
-        this.jTabbedPaneContenedor.setSelectedIndex(0);
-        this.jbtn_volverADatosDeUsuarioPersona.setEnabled(false);
-        this.jbtn_volverADatosDeUsuarioPersona.setEnabled(false);
-
         this.jtb_usuario.setEnabled(true);
 
+        this.jlbl_alertaNickName.setIcon(null);
+        this.jlbl_alertaPassword.setIcon(null);
+        this.jlbl_alertaConfirmarPassword.setIcon(null);
+        this.jlbl_alertaPersonaAsociada.setIcon(null);
+        this.jlbl_alertaEmpleadoAsociado.setIcon(null);
+
+        this.jlbl_mensaje.setText("");
         this.crud = "buscar";
-
-    }//GEN-LAST:event_jbtn_listarActionPerformed
-
-    /**
-     * Controla el boton agregar
-     *
-     * @param evt
-     */
-    private void jbtn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_agregarActionPerformed
-        this.usuarioSeleccionado = new Usuario();
-        Persona nuevaPersonAsociada = new Persona();
-        Empleado nuevoEmpleadoAsociado = new Empleado();
-        usuarioSeleccionado.setUnaPersona(nuevaPersonAsociada);
-        usuarioSeleccionado.setUnEmpleado(nuevoEmpleadoAsociado);
-
-        this.crud = "agregar";
-        habilitarTodosLosBotones(false);
-        habilitarTodosLosCampos(true);
-        jtf_nickname.setEnabled(true);
-        jtf_nickname.requestFocus();
-
-        jbtn_listarPersona.setEnabled(true);
-        jtf_buscarPersona.setEnabled(true);
-
-        jtf_buscarEmpleado.setEnabled(true);
-
-        this.validador.limpiarCampo(this.jtf_nickname);
-        this.validador.limpiarCampo(this.jtf_empleadoAsociado);
-        this.validador.limpiarCampo(this.jtf_personaAsociada);
-        this.validador.limpiarCampo(this.jtf_buscarUsuario);
-        this.jpf_password.setText("");
-        this.jpf_confirmarPassword.setText("");
-
-        this.jtf_empleadoAsociado.setEnabled(false);
-        this.jtf_personaAsociada.setEnabled(false);
-        this.validador.habilitarBoton(false, this.jbtn_listar, new Color(30, 132, 73), Color.WHITE, null, null);
-        this.validador.habilitarBoton(true, this.jbtn_aceptar, new Color(30, 132, 73), Color.WHITE, null, null);
-        this.validador.habilitarBoton(true, this.jbtn_cancelar, Color.red, Color.WHITE, null, null);
-        this.validador.habilitarBoton(false, this.jbtn_agregar, new Color(30, 132, 73), Color.WHITE, null, null);
-        this.validador.habilitarCampo(false, this.jtf_buscarUsuario);
-
-        this.validador.habilitarBoton(true, this.jbtn_listarEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
-        this.validador.habilitarBoton(true, this.jbtn_listarPersona, new Color(30, 132, 73), Color.WHITE, null, null);
-
-        this.jtb_usuario.setEnabled(false);
-
-        this.jTabbedPaneContenedor.setSelectedIndex(0);
-        this.jbtn_volverADatosDeUsuarioPersona.setEnabled(false);
-        this.jbtn_volverADatosDeUsuarioPersona.setEnabled(false);
-
-
-    }//GEN-LAST:event_jbtn_agregarActionPerformed
-
-    /**
-     * Controla el Foco del JTextFiel buscar persona
-     *
-     * @param evt
-     */
-    private void jtf_buscarUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_buscarUsuarioFocusGained
-        if (this.jtf_buscarUsuario.isEditable()) {
-            this.tablaUsuarioModelo.setUsuarios(this.controlador.buscarTodosLosUsuarios());
-
-            //Refrescar el modelo en la tabla
-            this.tablaUsuarioModelo.fireTableDataChanged();
-
-            limpiarTodosLosCampos();
-            habilitarTodosLosCampos(false);
-            habilitarTodosLosBotones(false);
-
-            this.validador.habilitarBoton(true, this.jbtn_agregar, new Color(30, 132, 73), Color.WHITE, null, null);
-            this.validador.habilitarBoton(true, this.jbtn_listar, new Color(30, 132, 73), Color.WHITE, null, null);
-            this.validador.habilitarCampo(true, this.jtf_buscarUsuario);
-
-            this.usuarioSeleccionado = null;
-
-            this.jtb_usuario.setEnabled(true);
-
-            this.jlbl_alertaNickName.setIcon(null);
-            this.jlbl_alertaPassword.setIcon(null);
-            this.jlbl_alertaConfirmarPassword.setIcon(null);
-            this.jlbl_alertaPersonaAsociada.setIcon(null);
-            this.jlbl_alertaEmpleadoAsociado.setIcon(null);
-            this.jTabbedPaneContenedor.setSelectedIndex(0);
-
-        }
-    }//GEN-LAST:event_jtf_buscarUsuarioFocusGained
-
-    /**
-     * @param evt
-     */
-    private void jtf_buscarUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_buscarUsuarioKeyReleased
-        if (this.jtf_buscarUsuario.isEditable()) {
-            //Actualizar el TableModel con la lista del controlador
-            this.tablaUsuarioModelo.setUsuarios(this.controlador.buscarUsuariosPorNickName(this.jtf_buscarUsuario.getText()));
-
-            //Refrescar el modelo en la tabla
-            this.tablaUsuarioModelo.fireTableDataChanged();
-        }
-    }//GEN-LAST:event_jtf_buscarUsuarioKeyReleased
+    }//GEN-LAST:event_jbtn_cancelarActionPerformed
 
     /**
      * Controla el boton eliminar
@@ -958,289 +939,29 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
         this.jtb_usuario.setEnabled(false);
     }//GEN-LAST:event_jbtn_eliminarActionPerformed
 
-    private void jtf_personaAsociadaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtf_personaAsociadaMousePressed
-        if (this.usuarioSeleccionado != null) {
-            if (this.usuarioSeleccionado.getUnaPersona() != null) {
-                this.jTabbedPaneContenedor.setSelectedIndex(1);
-                this.validador.habilitarBoton(true, this.jbtn_volverADatosDeUsuarioPersona, new Color(255, 255, 0), Color.BLACK, null, null);
-
-                //Actualizar el TableModel con la lista del controlador
-                this.tablaPersonaModelo.setPersonas(null);
-
-                //Refrescar el modelo en la tabla
-                this.tablaPersonaModelo.fireTableDataChanged();
-
-                if (this.crud.equals("agregar")) {
-                    this.jtf_buscarPersona.setText("");
-                    this.jtf_buscarPersona.setEnabled(false);
-                    this.jtb_personaAsociada.setEnabled(true);
-                    ///asdsdasdasd
-                    if (this.usuarioSeleccionado.getUnaPersona().getId() != null) {
-                        this.tablaPersonaModelo.setPersonas(this.controlador.buscarTodasLasPersonas());
-                        //Refrescar el modelo en la tabla
-                        this.tablaPersonaModelo.fireTableDataChanged();
-                        this.jtb_personaAsociada.changeSelection(this.tablaPersonaModelo.buscarFilaPersona(this.usuarioSeleccionado.getUnaPersona()) - 1, 1, false, false);
-
-                        this.validador.habilitarBoton(true, this.jbtn_desasignarPersona, Color.RED, Color.WHITE, null, null);
-                    } else {
-                        this.jtf_buscarPersona.setText("");
-                        this.jtf_buscarPersona.setEnabled(false);
-                        this.jtb_personaAsociada.setEnabled(true);
-                    }
-
-                }
-                if (this.crud.equals("buscar")) {
-                    this.tablaPersonaModelo.setPersonas(this.controlador.buscarTodasLasPersonas());
-                    this.jtb_personaAsociada.setEnabled(false);
-                    //Refrescar el modelo en la tabla
-                    this.tablaPersonaModelo.fireTableDataChanged();
-                    this.jtb_personaAsociada.changeSelection(this.tablaPersonaModelo.buscarFilaPersona(this.usuarioSeleccionado.getUnaPersona()) - 1, 1, false, false);
-                    this.validador.habilitarBoton(false, this.jbtn_asignarEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
-                    this.validador.habilitarBoton(false, this.jbtn_desasignarEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
-                }
-            }
-        }
-
-
-    }//GEN-LAST:event_jtf_personaAsociadaMousePressed
-
-    private void jtf_empleadoAsociadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtf_empleadoAsociadoMousePressed
-        if (this.usuarioSeleccionado != null) {
-            if (this.usuarioSeleccionado.getUnEmpleado() != null) {
-                this.jTabbedPaneContenedor.setSelectedIndex(2);
-                this.validador.habilitarBoton(true, this.jbtn_volverADatosDeUsuarioEmpleado, new Color(255, 255, 0), Color.BLACK, null, null);
-
-                //Actualizar el TableModel con la lista del controlador
-                this.tablaEmpleadoModelo.setEmpleados(null);
-
-                //Refrescar el modelo en la tabla
-                this.tablaEmpleadoModelo.fireTableDataChanged();
-
-                if (this.crud.equals("agregar")) {
-                    if (this.usuarioSeleccionado.getUnEmpleado().getId() != null) {
-                        this.tablaEmpleadoModelo.setEmpleados(this.controlador.buscarTodosLosEmpleados());
-                        //Refrescar el modelo en la tabla
-                        this.tablaEmpleadoModelo.fireTableDataChanged();
-                        this.jtb_empleadoAsociado.changeSelection(this.tablaEmpleadoModelo.buscarFilaEmpleado(this.usuarioSeleccionado.getUnEmpleado()) - 1, 1, false, false);
-
-                        this.validador.habilitarBoton(true, this.jbtn_desasignarEmpleado, Color.RED, Color.WHITE, null, null);
-                    } else {
-                        this.jtf_buscarEmpleado.setText("");
-                        this.jtf_buscarEmpleado.setEnabled(false);
-                        this.jtb_empleadoAsociado.setEnabled(true);
-                    }
-
-                }
-                if (this.crud.equals("buscar")) {
-                    this.tablaEmpleadoModelo.setEmpleados(this.controlador.buscarTodosLosEmpleados());
-                    this.jtb_empleadoAsociado.setEnabled(false);
-                    //Refrescar el modelo en la tabla
-                    this.tablaEmpleadoModelo.fireTableDataChanged();
-                    this.jtb_empleadoAsociado.changeSelection(this.tablaEmpleadoModelo.buscarFilaEmpleado(this.usuarioSeleccionado.getUnEmpleado()) - 1, 1, false, false);
-                    this.validador.habilitarBoton(false, this.jbtn_asignarEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
-                    this.validador.habilitarBoton(false, this.jbtn_desasignarEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
-                }
-            }
-        }
-    }//GEN-LAST:event_jtf_empleadoAsociadoMousePressed
-
-    private void jbtn_volverADatosDeUsuarioPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_volverADatosDeUsuarioPersonaActionPerformed
-        this.jTabbedPaneContenedor.setSelectedIndex(0);
-        this.validador.habilitarBoton(false, this.jbtn_volverADatosDeUsuarioPersona, new Color(30, 132, 73), Color.WHITE, null, null);
-
-    }//GEN-LAST:event_jbtn_volverADatosDeUsuarioPersonaActionPerformed
-
-    private void jbtn_volverADatosDeUsuarioEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_volverADatosDeUsuarioEmpleadoActionPerformed
-
-        if (this.crud.equals("agregar")) {
-            this.jTabbedPaneContenedor.setSelectedIndex(0);
-            this.validador.habilitarBoton(false, this.jbtn_volverADatosDeUsuarioEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
-        }
-
-        if (this.crud.equals("buscar")) {
-            this.jTabbedPaneContenedor.setSelectedIndex(0);
-        }
-
-    }//GEN-LAST:event_jbtn_volverADatosDeUsuarioEmpleadoActionPerformed
-
-    private void jbtn_listarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_listarPersonaActionPerformed
-        //Actualizar el TableModel con la lista del controlador
-        this.tablaPersonaModelo.setPersonas(this.controlador.buscarTodasLasPersonas());
-
-        //Refrescar el modelo en la tabla
-        this.tablaPersonaModelo.fireTableDataChanged();
-
-        this.validador.habilitarCampo(true, this.jtf_buscarPersona);
-
-        if (this.crud.equals("agregar")) {
-            this.jtf_buscarPersona.setText("");
-            this.jtf_buscarPersona.setEnabled(true);
-        }
-    }//GEN-LAST:event_jbtn_listarPersonaActionPerformed
-
-    private void jbtn_listarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_listarEmpleadoActionPerformed
-        //Actualizar el TableModel con la lista del controlador
-        this.tablaEmpleadoModelo.setEmpleados(this.controlador.buscarTodosLosEmpleados());
-
-        //Refrescar el modelo en la tabla
-        this.tablaEmpleadoModelo.fireTableDataChanged();
-
-        this.validador.habilitarCampo(true, this.jtf_buscarEmpleado);
-
-        if (this.crud.equals("agregar")) {
-            this.jtf_buscarEmpleado.setText("");
-            this.jtf_buscarEmpleado.setEnabled(true);
-        }
-    }//GEN-LAST:event_jbtn_listarEmpleadoActionPerformed
-
-    private void jtf_buscarEmpleadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_buscarEmpleadoKeyReleased
-        if (this.jtf_buscarEmpleado.isEditable()) {
-            //Actualizar el TableModel con la lista del controlador
-            this.tablaEmpleadoModelo.setEmpleados(this.controlador.buscarEmpleadoDeUsuarioPorDNI(this.jtf_buscarEmpleado.getText()));
-
-            //Refrescar el modelo en la tabla
-            this.tablaEmpleadoModelo.fireTableDataChanged();
-        }
-    }//GEN-LAST:event_jtf_buscarEmpleadoKeyReleased
-
-    private void jtf_buscarEmpleadoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_buscarEmpleadoFocusGained
-        if (this.jtf_buscarEmpleado.isEditable()) {
-            this.tablaEmpleadoModelo.setEmpleados(this.controlador.buscarTodosLosEmpleados());
-            this.jtf_buscarEmpleado.setText("");
-            //Refrescar el modelo en la tabla
-            this.tablaEmpleadoModelo.fireTableDataChanged();
-
-        }
-    }//GEN-LAST:event_jtf_buscarEmpleadoFocusGained
-
-    private void jbtn_asignarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_asignarEmpleadoActionPerformed
-
-        if (this.crud.equals("agregar")) {
-            int opcion = 0;
-            opcion = JOptionPane.showConfirmDialog(this, "Realmente Asociar al Empleado", "Confirmar Asociación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (opcion == 0) {
-                this.jTabbedPaneContenedor.setSelectedIndex(0);
-                this.validador.habilitarBoton(false, this.jbtn_volverADatosDeUsuarioEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
-
-                int filaSeleccionada = this.jtb_empleadoAsociado.getSelectedRow();
-                this.usuarioSeleccionado.setUnEmpleado(this.tablaEmpleadoModelo.obtenerEmpleadoEn(filaSeleccionada));
-                this.jtf_empleadoAsociado.setText(this.usuarioSeleccionado.getUnEmpleado().getDni());
-
-            } else {
-                //Actualizar el TableModel con la lista del controlador
-                this.tablaEmpleadoModelo.setEmpleados(this.controlador.buscarTodosLosEmpleados());
-                //Refrescar el modelo en la tabla
-                this.tablaEmpleadoModelo.fireTableDataChanged();
-                this.validador.habilitarCampo(true, this.jtf_buscarEmpleado);
-                this.jtf_buscarEmpleado.setText("");
-                this.jtf_buscarEmpleado.setEnabled(true);
-            }
-        }
-
-    }//GEN-LAST:event_jbtn_asignarEmpleadoActionPerformed
-
-    private void jbtn_desasignarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_desasignarEmpleadoActionPerformed
-        if (this.crud.equals("agregar")) {
-            int opcion = 0;
-            opcion = JOptionPane.showConfirmDialog(this, "Realmente Desasociar al Empleado", "Confirmar Desasociación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (opcion == 0) {
-                this.jTabbedPaneContenedor.setSelectedIndex(0);
-                this.validador.habilitarBoton(false, this.jbtn_volverADatosDeUsuarioEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
-                this.usuarioSeleccionado.setUnEmpleado(new Empleado());
-                this.jtf_empleadoAsociado.setText("");
-
-            }
-        }
-    }//GEN-LAST:event_jbtn_desasignarEmpleadoActionPerformed
-
-    private void jtf_buscarPersonaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_buscarPersonaKeyReleased
-        if (this.jtf_buscarPersona.isEditable()) {
-            //Actualizar el TableModel con la lista del controlador
-            this.tablaPersonaModelo.setPersonas(this.controlador.buscarPersonaDeUsuarioPorDNI(this.jtf_buscarPersona.getText()));
-
-            //Refrescar el modelo en la tabla
-            this.tablaPersonaModelo.fireTableDataChanged();
-        }
-    }//GEN-LAST:event_jtf_buscarPersonaKeyReleased
-
-    private void jtf_buscarPersonaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_buscarPersonaFocusGained
-        if (this.jtf_buscarPersona.isEditable()) {
-            this.tablaPersonaModelo.setPersonas(this.controlador.buscarTodasLasPersonas());
-            this.jtf_buscarPersona.setText("");
-            //Refrescar el modelo en la tabla
-            this.tablaPersonaModelo.fireTableDataChanged();
-
-        }
-    }//GEN-LAST:event_jtf_buscarPersonaFocusGained
-
-    private void jbtn_asignarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_asignarPersonaActionPerformed
-        if (this.crud.equals("agregar")) {
-            int opcion = 0;
-            opcion = JOptionPane.showConfirmDialog(this, "Realmente Asociar a la Persona", "Confirmar Asociación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (opcion == 0) {
-                this.jTabbedPaneContenedor.setSelectedIndex(0);
-                this.validador.habilitarBoton(false, this.jbtn_volverADatosDeUsuarioPersona, new Color(30, 132, 73), Color.WHITE, null, null);
-
-                int filaSeleccionada = this.jtb_personaAsociada.getSelectedRow();
-                this.usuarioSeleccionado.setUnaPersona(this.tablaPersonaModelo.obtenerPersonaEn(filaSeleccionada));
-                this.jtf_personaAsociada.setText(this.usuarioSeleccionado.getUnaPersona().getDni());
-
-            } else {
-                //Actualizar el TableModel con la lista del controlador
-                this.tablaPersonaModelo.setPersonas(this.controlador.buscarTodasLasPersonas());
-                //Refrescar el modelo en la tabla
-                this.tablaPersonaModelo.fireTableDataChanged();
-                this.validador.habilitarCampo(true, this.jtf_buscarPersona);
-                this.jtf_buscarPersona.setText("");
-                this.jtf_buscarPersona.setEnabled(true);
-            }
-        }
-    }//GEN-LAST:event_jbtn_asignarPersonaActionPerformed
-
-    private void jbtn_desasignarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_desasignarPersonaActionPerformed
-        if (this.crud.equals("agregar")) {
-            int opcion = 0;
-            opcion = JOptionPane.showConfirmDialog(this, "Realmente Desasociar a la Persona", "Confirmar Desasociación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (opcion == 0) {
-                this.jTabbedPaneContenedor.setSelectedIndex(0);
-                this.validador.habilitarBoton(false, this.jbtn_volverADatosDeUsuarioEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
-                this.usuarioSeleccionado.setUnaPersona(new Persona());
-                this.jtf_personaAsociada.setText("");
-
-            }
-        }
-    }//GEN-LAST:event_jbtn_desasignarPersonaActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanelEmpleadoAsociado;
-    private javax.swing.JPanel jPanelPersonaAsociada;
     private javax.swing.JPanel jPanel_crud;
     private javax.swing.JPanel jPanel_datos;
     private javax.swing.JScrollPane jScrollPaneEmpleadoAsociado;
-    private javax.swing.JScrollPane jScrollPanePersonaAsociada;
     private javax.swing.JScrollPane jScrollPaneTabla;
     private javax.swing.JTabbedPane jTabbedPaneContenedor;
     private javax.swing.JButton jbtn_aceptar;
     private javax.swing.JButton jbtn_agregar;
     private javax.swing.JButton jbtn_asignarEmpleado;
-    private javax.swing.JButton jbtn_asignarPersona;
     private javax.swing.JButton jbtn_cancelar;
     private javax.swing.JButton jbtn_desasignarEmpleado;
-    private javax.swing.JButton jbtn_desasignarPersona;
     private javax.swing.JButton jbtn_eliminar;
     private javax.swing.JButton jbtn_listar;
     private javax.swing.JButton jbtn_listarEmpleado;
-    private javax.swing.JButton jbtn_listarPersona;
     private javax.swing.JButton jbtn_modificar;
     private javax.swing.JButton jbtn_volver;
     private javax.swing.JButton jbtn_volverADatosDeUsuarioEmpleado;
-    private javax.swing.JButton jbtn_volverADatosDeUsuarioPersona;
     private javax.swing.JLabel jlbl_alertaConfirmarPassword;
     private javax.swing.JLabel jlbl_alertaEmpleadoAsociado;
     private javax.swing.JLabel jlbl_alertaNickName;
@@ -1250,14 +971,11 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
     private javax.swing.JPasswordField jpf_confirmarPassword;
     private javax.swing.JPasswordField jpf_password;
     private javax.swing.JTable jtb_empleadoAsociado;
-    private javax.swing.JTable jtb_personaAsociada;
     private javax.swing.JTable jtb_usuario;
     private javax.swing.JTextField jtf_buscarEmpleado;
-    private javax.swing.JTextField jtf_buscarPersona;
     private javax.swing.JTextField jtf_buscarUsuario;
     private javax.swing.JTextField jtf_empleadoAsociado;
     private javax.swing.JTextField jtf_nickname;
-    private javax.swing.JTextField jtf_personaAsociada;
     // End of variables declaration//GEN-END:variables
 
     //--------------------------------------------------------------------------
@@ -1268,13 +986,11 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
 
         this.validador.habilitarCampo(estado, this.jtf_nickname);
         this.validador.habilitarCampo(estado, this.jtf_empleadoAsociado);
-        this.validador.habilitarCampo(estado, this.jtf_personaAsociada);
         this.validador.habilitarCampo(estado, this.jtf_buscarUsuario);
         this.jpf_password.setEnabled(estado);
         this.jpf_confirmarPassword.setEnabled(estado);
 
         this.validador.habilitarCampo(estado, this.jtf_buscarEmpleado);
-        this.validador.habilitarCampo(estado, this.jtf_buscarPersona);
 
     }
 
@@ -1282,13 +998,11 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
     public void limpiarTodosLosCampos() {
         this.validador.limpiarCampo(this.jtf_nickname);
         this.validador.limpiarCampo(this.jtf_empleadoAsociado);
-        this.validador.limpiarCampo(this.jtf_personaAsociada);
         this.validador.limpiarCampo(this.jtf_buscarUsuario);
         this.jpf_password.setText("");
         this.jpf_confirmarPassword.setText("");
 
         this.validador.limpiarCampo(this.jtf_buscarEmpleado);
-        this.validador.limpiarCampo(this.jtf_buscarPersona);
     }
 
     @Override
@@ -1300,11 +1014,9 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
         this.validador.habilitarBoton(estado, this.jbtn_eliminar, new Color(30, 132, 73), Color.WHITE, null, null);
         this.validador.habilitarBoton(estado, this.jbtn_modificar, new Color(30, 132, 73), Color.WHITE, null, null);
 
-        this.validador.habilitarBoton(estado, this.jbtn_volverADatosDeUsuarioPersona, new Color(30, 132, 73), Color.WHITE, null, null);
         this.validador.habilitarBoton(estado, this.jbtn_volverADatosDeUsuarioEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
 
         this.validador.habilitarBoton(estado, this.jbtn_listarEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
-        this.validador.habilitarBoton(estado, this.jbtn_listarPersona, new Color(30, 132, 73), Color.WHITE, null, null);
 
     }
 
@@ -1368,9 +1080,6 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
             this.usuarioSeleccionado = this.tablaUsuarioModelo.obtenerUsuarioEn(filaSeleccionada);
             this.jtf_nickname.setText(this.usuarioSeleccionado.getNombre());
 
-            if (usuarioSeleccionado.getUnaPersona() != null) {
-                this.jtf_personaAsociada.setText(this.usuarioSeleccionado.getUnaPersona().getDni());
-            }
             if (usuarioSeleccionado.getUnEmpleado() != null) {
                 this.jtf_empleadoAsociado.setText(this.usuarioSeleccionado.getUnEmpleado().getDni());
             }
@@ -1401,23 +1110,6 @@ public class PanelUsuario extends javax.swing.JPanel implements InterfacePanel {
         } else {
             this.validador.habilitarBoton(false, this.jbtn_asignarEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
             this.validador.habilitarBoton(false, this.jbtn_desasignarEmpleado, new Color(30, 132, 73), Color.WHITE, null, null);
-        }
-    }
-
-    /**
-     * Selecciona una fila de la tabla, devolviendo un objeto Persona
-     */
-    public void seleccionarPersona() {
-        //obtiene el indice de la fila seleccionada en la tabla de empleados
-        int filaSeleccionada = this.jtb_personaAsociada.getSelectedRow();
-        // si la fila esta seleccionada, seteamos la persona auxiliar, llamando al modelo de tabla        
-        if (filaSeleccionada >= 0) {
-            if (this.crud.equals("agregar")) {
-                this.validador.habilitarBoton(true, this.jbtn_asignarPersona, new Color(30, 132, 73), Color.WHITE, null, null);
-            }
-        } else {
-            this.validador.habilitarBoton(false, this.jbtn_asignarPersona, new Color(30, 132, 73), Color.WHITE, null, null);
-            this.validador.habilitarBoton(false, this.jbtn_desasignarPersona, new Color(30, 132, 73), Color.WHITE, null, null);
         }
     }
 

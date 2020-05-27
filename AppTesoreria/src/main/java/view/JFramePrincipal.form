@@ -122,7 +122,7 @@
             <Component class="javax.swing.JTree" name="arbolModulos">
               <Properties>
                 <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-                  <TreeModel code="El Porvenir&#xa; Administraci&#xf3;n General&#xa;  Organismo&#xa;  Personas&#xa;  Empleados  &#xa;  Usuarios&#xa; Gesti&#xf3;n de Turnos&#xa;  Asignar Turno&#xa;  Reasignar Turno&#xa; Gestion de Tramite&#xa;  Procesar Tramite&#xa;  Ver cantidad de Tramites por Area&#xa;  Ver cantidad deTipo de tramite por Area&#xa;  &#xa;      &#xa;  "/>
+                  <TreeModel code="Tesoreria&#xa; Administraci&#xf3;n General&#xa;  Empresa&#xa;  Empleados  &#xa;  Usuarios&#xa; Movimientos&#xa;  Registro de Movimientos&#xa;      &#xa;  "/>
                 </Property>
                 <Property name="alignmentX" type="float" value="0.0"/>
                 <Property name="alignmentY" type="float" value="0.0"/>

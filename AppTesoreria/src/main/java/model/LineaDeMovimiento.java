@@ -6,41 +6,41 @@
 package model;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 /**
  *
  * @author Ariel
  */
 @Entity
-@Table(name = "USUARIO")
-public class Usuario implements Serializable {
+public class LineaDeMovimiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "nombre")
-    private String nombre;
-
-    @Column(name = "clave")
-    private String clave;
+    private Float monto;
 
     @ManyToOne
-    @JoinColumn(name = "id_tipoUsuario")
-    private TipoUsuario tipoUsuario;
+    @JoinColumn(name = "fk_concepto")
+    private Concepto unConcepto;
 
     @ManyToOne
-    @JoinColumn(name = "id_Empleado")
+    @JoinColumn(name = "fk_empleado")
     private Empleado unEmpleado;
+    
+    @ManyToOne
+    @JoinColumn(name = "fk_registro")
+    private RegistroDeMovimiento unRegistro;
+
+    public LineaDeMovimiento() {
+    }
 
     public Long getId() {
         return id;
@@ -60,10 +60,10 @@ public class Usuario implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
+        if (!(object instanceof LineaDeMovimiento)) {
             return false;
         }
-        Usuario other = (Usuario) object;
+        LineaDeMovimiento other = (LineaDeMovimiento) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -72,31 +72,23 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Usuario[ id=" + id + " ]";
+        return "model.LineaDeMovimiento[ id=" + id + " ]";
     }
 
-    public String getNombre() {
-        return nombre;
+    public Float getMonto() {
+        return monto;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setMonto(Float monto) {
+        this.monto = monto;
     }
 
-    public String getClave() {
-        return clave;
+    public Concepto getUnConcepto() {
+        return unConcepto;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
-
-    public TipoUsuario getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(TipoUsuario tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
+    public void setUnConcepto(Concepto unConcepto) {
+        this.unConcepto = unConcepto;
     }
 
     public Empleado getUnEmpleado() {
@@ -106,5 +98,15 @@ public class Usuario implements Serializable {
     public void setUnEmpleado(Empleado unEmpleado) {
         this.unEmpleado = unEmpleado;
     }
+
+    public RegistroDeMovimiento getUnRegistro() {
+        return unRegistro;
+    }
+
+    public void setUnRegistro(RegistroDeMovimiento unRegistro) {
+        this.unRegistro = unRegistro;
+    }
+    
+    
 
 }

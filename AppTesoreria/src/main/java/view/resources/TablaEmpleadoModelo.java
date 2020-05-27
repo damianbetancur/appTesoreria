@@ -16,7 +16,7 @@ import model.Empleado;
  */
 public class TablaEmpleadoModelo extends AbstractTableModel {
 
-    private static final String[] COLUMNAS = {"N°", "Nombre", "Apellido", "DNI", "Tipo Empleado", "Area"};
+    private static final String[] COLUMNAS = {"N°", "Nombre", "Apellido", "DNI", "Tipo Empleado"};
     private List<Empleado> empleados;
 
     public TablaEmpleadoModelo() {
@@ -30,7 +30,7 @@ public class TablaEmpleadoModelo extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 6;
+        return 5;
     }
 
     @Override
@@ -54,9 +54,7 @@ public class TablaEmpleadoModelo extends AbstractTableModel {
             case 4:
                 retorno = empleado.getUnTipoEmpleado().getDescripcion();
                 break;
-            case 5:
-                retorno = empleado.getUnAreaA().getNombre();
-                break;
+           
         }
 
         return retorno;

@@ -30,7 +30,7 @@ public class EmpleadoController {
 
     private final UsuarioJpaController usuarioDAO;
 
-    //Model
+    //Model 
     private static Empresa empresaInstanciaUnica;
 
     public EmpleadoController() {

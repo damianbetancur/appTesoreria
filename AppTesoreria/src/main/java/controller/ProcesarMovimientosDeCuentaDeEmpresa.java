@@ -6,11 +6,8 @@
 package controller;
 
 import dao.Conexion;
-import dao.CuentaJpaController;
 import dao.RegistroDeMovimientoJpaController;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import model.Concepto;
@@ -26,6 +23,8 @@ import view.ValidadorDeCampos;
  */
 public class ProcesarMovimientosDeCuentaDeEmpresa {
 
+    private boolean registroNuevo = false;
+    
     private final ValidadorDeCampos validador;
     //DAO
     private final RegistroDeMovimientoJpaController registroDeMovimientoDAO;
@@ -129,4 +128,13 @@ public class ProcesarMovimientosDeCuentaDeEmpresa {
         this.registroSeleccionado = registroSeleccionado;
     }
 
+    public boolean isRegistroNuevo() {
+        return registroNuevo;
+    }
+
+    public void setRegistroNuevo(boolean registroNuevo) {
+        this.registroNuevo = registroNuevo;
+    }
+    
+    
 }

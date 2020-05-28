@@ -245,8 +245,10 @@ public class PanelSeleccionDeCuentas extends javax.swing.JPanel implements Inter
         
         if (controlador.verificarExistenciaDeRegistro(cuentaSeleccionada, fechaSeleccionada)) {            
             controlador.setRegistroSeleccionado(controlador.buscarRegistroDeMovimiento(cuentaSeleccionada, fechaSeleccionada));
+            controlador.setRegistroNuevo(false);
         }else{
             controlador.crearNuevoRegistroDeMovimiento(cuentaSeleccionada, fechaSeleccionada);
+            controlador.setRegistroNuevo(true);
         }
         
 

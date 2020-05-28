@@ -52,7 +52,7 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
         habilitarTodosLosBotones(false);
         this.validador.habilitarBoton(true, this.jbtn_cancelar, Color.red, Color.WHITE, null, null);
         this.validador.habilitarBoton(false, this.jbtn_generarInforme, new Color(30, 132, 73), Color.WHITE, null, null);
-
+        this.validador.habilitarBoton(true, this.jbtn_agregarMovimiento, new Color(30, 132, 73), Color.WHITE, null, null);
         habilitarTodosLosCampos(false);
 
         //iniciar el controladorPersona de esta vista
@@ -191,14 +191,13 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jtf_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(440, 440, 440)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlbl_alertaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlbl_alertaApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel_datosLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jlbl_alertaDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
         jPanel_datosLayout.setVerticalGroup(
             jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,6 +235,7 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
         jtb_lineasDeMovimientos.setModel(tablaLineaDeMovimientoModelo);
         jScrollPaneTabla.setViewportView(jtb_lineasDeMovimientos);
 
+        jbtn_agregarMovimiento.setFont(new java.awt.Font("Rockwell", 1, 18)); // NOI18N
         jbtn_agregarMovimiento.setText("Agregar Movimiento");
         jbtn_agregarMovimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,22 +248,23 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
         jPanel_crudLayout.setHorizontalGroup(
             jPanel_crudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_crudLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPaneTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(jPanel_crudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_crudLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPaneTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 910, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_crudLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbtn_agregarMovimiento)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_crudLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbtn_agregarMovimiento)
-                .addGap(57, 57, 57))
         );
         jPanel_crudLayout.setVerticalGroup(
             jPanel_crudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_crudLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jScrollPaneTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addComponent(jScrollPaneTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 214, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jbtn_agregarMovimiento)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
 
         jbtn_generarInforme.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -305,9 +306,9 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
                 .addComponent(jPanel_datos, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel_crud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(23, 23, 23)
                 .addComponent(jbtn_generarInforme, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -417,7 +418,7 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
 
     @Override
     public void habilitarTodosLosBotones(boolean estado) {
-        this.validador.habilitarBoton(estado, this.jbtn_generarInforme, new Color(30, 132, 73), Color.WHITE, null, null);
+        this.validador.habilitarBoton(estado, this.jbtn_generarInforme, new Color(30, 132, 73), Color.WHITE, null, null);        
     }
 
     //--------------------------------------------------------------------------
@@ -449,7 +450,10 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
         if (!controlador.getRegistroSeleccionado().getLineasDeRegistroDeMovimiento().isEmpty()) {
             this.tablaLineaDeMovimientoModelo.setLineasDeMovimientos(this.controlador.buscarTodasLasLineasDeMovimientoDeUnRegistro());
             //Refrescar el modelo en la tabla
-            this.tablaLineaDeMovimientoModelo.fireTableDataChanged();
+            this.tablaLineaDeMovimientoModelo.fireTableDataChanged();            
+            this.validador.habilitarBoton(true, this.jbtn_generarInforme, new Color(30, 132, 73), Color.WHITE, null, null);
+        }else{
+            this.validador.habilitarBoton(false, this.jbtn_generarInforme, new Color(30, 132, 73), Color.WHITE, null, null);
         }
 
     }

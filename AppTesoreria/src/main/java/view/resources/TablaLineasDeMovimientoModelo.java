@@ -40,20 +40,26 @@ public class TablaLineasDeMovimientoModelo extends AbstractTableModel {
 
         switch (columnIndex) {
             case 0:
-                retorno = rowIndex;
+                retorno = rowIndex + 1;
                 break;
             case 1:
                 retorno = lineaDeMovimiento.getUnConcepto().getDescripcion();
                 break;
             case 2:
-                retorno = lineaDeMovimiento.getMonto();
+                retorno = "     $"+lineaDeMovimiento.getMonto();
                 break;
             case 3:
-                retorno = lineaDeMovimiento.getUnConcepto().getUnTipoMovimiento().getDescripcion();
+                if (lineaDeMovimiento.getUnConcepto().getUnTipoMovimiento().getDescripcion().equals("Debito")) {
+                    retorno = "";
+                }else{
+                    retorno = "                              X";
+                }
                 break;
             case 4:                
                 if (lineaDeMovimiento.getUnConcepto().getUnTipoMovimiento().getDescripcion().equals("Credito")) {
-                    retorno = lineaDeMovimiento.getUnConcepto().getUnTipoMovimiento().getDescripcion();
+                    retorno = "";
+                }else{
+                    retorno = "                              X";
                 }
                 
                 break;

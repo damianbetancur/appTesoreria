@@ -26,14 +26,14 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
     private final ValidadorDeCampos validador;
 
     //variables de tabla
-    private final TablaLineasDeMovimientoModelo tablaLineaDeMovimientoModelo;
+    private TablaLineasDeMovimientoModelo tablaLineaDeMovimientoModelo;
 
     //variables de comboBox
     private DefaultComboBoxModel cuentaModel;
 
-    private final ProcesarMovimientosDeCuentaDeEmpresa controlador;
+    private ProcesarMovimientosDeCuentaDeEmpresa controlador;
 
-    private final List<LineaDeMovimiento> lineasDeMovimientos;
+    private List<LineaDeMovimiento> lineasDeMovimientos;
 
     /**
      * Creates new form PanelPersona
@@ -319,6 +319,7 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
      * @param evt
      */
     private void jbtn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_cancelarActionPerformed
+
         //Inhabilita Botones
         habilitarTodosLosBotones(false);
 
@@ -328,6 +329,13 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
         //Habilita el Arbol de seleccion
         JFramePrincipal.getArbolModulos().setEnabled(true);
         JFramePrincipal.getjPanelContenido().removeAll();
+
+        this.controlador = null;
+        this.removeAll();
+
+        revalidate();
+        repaint();
+
         JFramePrincipal.getjPanelContenido().repaint();
     }//GEN-LAST:event_jbtn_cancelarActionPerformed
 
@@ -425,26 +433,25 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
 
     public void cargarRegistroDeMovimientosActual() {
 
-        this.cuentaModel.removeAllElements();
-
+        //System.out.println(""+controlador.getRegistroSeleccionado().getUnaCuenta().getDescripcion());
+        
+        
         this.cuentaModel = new DefaultComboBoxModel();
 
-        cuentaModel.addElement(controlador.getRegistroSeleccionado().getUnaCuenta());
-
+        this.cuentaModel.addElement(controlador.getRegistroSeleccionado().getUnaCuenta());
         this.jcb_cuenta.setModel(this.cuentaModel);
 
         this.jtf_fecha.setText(this.validador.convertirFechaAString(controlador.getRegistroSeleccionado().getFecha()));
-
         this.jtf_saldo.setText("$ " + controlador.getRegistroSeleccionado().getSaldo());
-
+        
+        
+        
         if (!controlador.getRegistroSeleccionado().getLineasDeRegistroDeMovimiento().isEmpty()) {
-            this.tablaLineaDeMovimientoModelo.setLineasDeMovimientos(this.controlador.buscarTodasLasLineasDeMovimientoDeUnRegistro(controlador.getRegistroSeleccionado()));
-
+            this.tablaLineaDeMovimientoModelo.setLineasDeMovimientos(this.controlador.buscarTodasLasLineasDeMovimientoDeUnRegistro());
             //Refrescar el modelo en la tabla
             this.tablaLineaDeMovimientoModelo.fireTableDataChanged();
         }
 
-        repaint();
     }
 
 }

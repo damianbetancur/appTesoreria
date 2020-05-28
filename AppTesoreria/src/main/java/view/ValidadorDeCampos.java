@@ -261,6 +261,9 @@ public class ValidadorDeCampos {
             if (mesfechaA == mesfechaB) {
                 if (diafechaA == diafechaB) {
                     fecha_validada = true;
+                    System.out.println("fechas iguales");
+                }else{
+                    System.out.println("fechas distintas");
                 }
             }
         }

@@ -24,7 +24,7 @@ public class PanelSeleccionDeCuentas extends javax.swing.JPanel implements Inter
 
     private final ValidadorDeCampos validador;
 
-    private final ProcesarMovimientosDeCuentaDeEmpresa controlador;
+    private ProcesarMovimientosDeCuentaDeEmpresa controlador;
 
     /**
      * Creates new form PanelEmpresa
@@ -231,6 +231,7 @@ public class PanelSeleccionDeCuentas extends javax.swing.JPanel implements Inter
         //Habilita el Arbol de seleccion
         JFramePrincipal.getArbolModulos().setEnabled(true);
         JFramePrincipal.getjPanelContenido().removeAll();
+        this.removeAll();
         JFramePrincipal.getjPanelContenido().repaint();
     }//GEN-LAST:event_jbtn_cancelarActionPerformed
 
@@ -242,7 +243,12 @@ public class PanelSeleccionDeCuentas extends javax.swing.JPanel implements Inter
         Cuenta cuentaSeleccionada = (Cuenta) this.jcb_cuentaDeEmpresa.getSelectedItem();
         Date fechaSeleccionada = jdc_fecha.getDate();
         
-        controlador.verificarExistenciaDeRegistro(cuentaSeleccionada, fechaSeleccionada);
+        if (controlador.verificarExistenciaDeRegistro(cuentaSeleccionada, fechaSeleccionada)) {            
+            controlador.setRegistroSeleccionado(controlador.buscarRegistroDeMovimiento(cuentaSeleccionada, fechaSeleccionada));
+        }else{
+            controlador.crearNuevoRegistroDeMovimiento(cuentaSeleccionada, fechaSeleccionada);
+        }
+        
 
         //Se crea el Panel Emplesa    
         PanelRegistroDeMovimientos unPanelRegistroDeMovimientos = new PanelRegistroDeMovimientos(this.controlador);

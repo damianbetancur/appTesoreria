@@ -22,7 +22,7 @@ public class PanelAgregarMovimiento extends javax.swing.JPanel implements Interf
 
     private final ValidadorDeCampos validador;
 
-    private final ProcesarMovimientosDeCuentaDeEmpresa controlador;
+    private ProcesarMovimientosDeCuentaDeEmpresa controlador;
 
     private Concepto conceptoSeleccionado;
 
@@ -260,6 +260,7 @@ public class PanelAgregarMovimiento extends javax.swing.JPanel implements Interf
         JFramePrincipal.getjPanelContenido().add(unPanelRegistroDeMovimientos);
         JFramePrincipal.getjPanelContenido().repaint();
         JFramePrincipal.getjPanelContenido().validate();
+        this.removeAll();
         this.updateUI();
     }//GEN-LAST:event_jbtn_cancelarActionPerformed
 

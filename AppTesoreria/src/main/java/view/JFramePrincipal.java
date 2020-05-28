@@ -279,6 +279,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
                     this.jPanelContenido.add(this.unPanelEmpresa);
                     this.unPanelEmpresa.validate();
+                    this.unPanelEmpresa.updateUI();
 
                 }
 
@@ -294,6 +295,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     this.jPanelContenido.add(this.unPanelEmpleado);
 
                     this.unPanelEmpleado.validate();
+                    this.unPanelEmpleado.updateUI();
                 }
 
                 if (captura.equals("[Empresa, Administración General, Usuarios]")) {
@@ -308,6 +310,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     this.jPanelContenido.add(this.unPanelUsuario);
 
                     this.unPanelUsuario.validate();
+                    this.unPanelEmpleado.updateUI();
                 }
                 
                 if (captura.equals("[Empresa, Modulo de Contabilidad, Registrar Movimientos]")) {
@@ -324,6 +327,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     this.jPanelContenido.add(this.unPanelSeleccionDeCuenta);
 
                     this.unPanelSeleccionDeCuenta.validate();
+                    this.unPanelSeleccionDeCuenta.updateUI();
                 }
                 
 

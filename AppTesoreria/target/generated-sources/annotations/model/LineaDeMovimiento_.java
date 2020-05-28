@@ -7,7 +7,7 @@ import model.Concepto;
 import model.Empleado;
 import model.RegistroDeMovimiento;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-05-28T03:22:00")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-05-28T05:16:34")
 @StaticMetamodel(LineaDeMovimiento.class)
 public class LineaDeMovimiento_ { 
 

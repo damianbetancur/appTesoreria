@@ -104,5 +104,4 @@ view\JFrameLogin.class
 model\TipoUsuario.class
 model\TipoEmpleado_.class
 view\PanelEmpleado$1.class
-view\PanelAgregarMovimiento$6.class
 dao\CuentaJpaController.class

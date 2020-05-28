@@ -30,6 +30,10 @@ public class Concepto implements Serializable {
     @ManyToOne
     @JoinColumn(name = "fk_TipoMovimiento")
     private TipoMovimiento unTipoMovimiento;
+    
+    @ManyToOne
+    @JoinColumn(name = "fk_empresa")
+    private Empresa unaEmpresaCC;
 
     public Concepto() {
     }
@@ -64,7 +68,7 @@ public class Concepto implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Concepto[ id=" + id + " ]";
+        return getDescripcion();
     }
 
     public String getDescripcion() {
@@ -83,4 +87,14 @@ public class Concepto implements Serializable {
         this.unTipoMovimiento = unTipoMovimiento;
     }
 
+    public Empresa getUnaEmpresaCC() {
+        return unaEmpresaCC;
+    }
+
+    public void setUnaEmpresaCC(Empresa unaEmpresaCC) {
+        this.unaEmpresaCC = unaEmpresaCC;
+    }
+
+    
+    
 }

@@ -17,8 +17,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import model.Cuenta;
-import model.Empresa;
 import model.TipoMovimiento;
+import model.Concepto;
+import model.Empresa;
 
 /**
  *
@@ -45,6 +46,9 @@ public class EmpresaJpaController implements Serializable {
         if (empresa.getTiposDeMovimientos() == null) {
             empresa.setTiposDeMovimientos(new ArrayList<TipoMovimiento>());
         }
+        if (empresa.getConceptos() == null) {
+            empresa.setConceptos(new ArrayList<Concepto>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -67,6 +71,12 @@ public class EmpresaJpaController implements Serializable {
                 attachedTiposDeMovimientos.add(tiposDeMovimientosTipoMovimientoToAttach);
             }
             empresa.setTiposDeMovimientos(attachedTiposDeMovimientos);
+            List<Concepto> attachedConceptos = new ArrayList<Concepto>();
+            for (Concepto conceptosConceptoToAttach : empresa.getConceptos()) {
+                conceptosConceptoToAttach = em.getReference(conceptosConceptoToAttach.getClass(), conceptosConceptoToAttach.getId());
+                attachedConceptos.add(conceptosConceptoToAttach);
+            }
+            empresa.setConceptos(attachedConceptos);
             em.persist(empresa);
             for (Empleado empleadosEmpleado : empresa.getEmpleados()) {
                 Empresa oldUnaEmpresaEOfEmpleadosEmpleado = empleadosEmpleado.getUnaEmpresaE();
@@ -95,6 +105,15 @@ public class EmpresaJpaController implements Serializable {
                     oldUnaEmpresaTMOfTiposDeMovimientosTipoMovimiento = em.merge(oldUnaEmpresaTMOfTiposDeMovimientosTipoMovimiento);
                 }
             }
+            for (Concepto conceptosConcepto : empresa.getConceptos()) {
+                Empresa oldUnaEmpresaCCOfConceptosConcepto = conceptosConcepto.getUnaEmpresaCC();
+                conceptosConcepto.setUnaEmpresaCC(empresa);
+                conceptosConcepto = em.merge(conceptosConcepto);
+                if (oldUnaEmpresaCCOfConceptosConcepto != null) {
+                    oldUnaEmpresaCCOfConceptosConcepto.getConceptos().remove(conceptosConcepto);
+                    oldUnaEmpresaCCOfConceptosConcepto = em.merge(oldUnaEmpresaCCOfConceptosConcepto);
+                }
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -115,6 +134,8 @@ public class EmpresaJpaController implements Serializable {
             List<Cuenta> cuentasNew = empresa.getCuentas();
             List<TipoMovimiento> tiposDeMovimientosOld = persistentEmpresa.getTiposDeMovimientos();
             List<TipoMovimiento> tiposDeMovimientosNew = empresa.getTiposDeMovimientos();
+            List<Concepto> conceptosOld = persistentEmpresa.getConceptos();
+            List<Concepto> conceptosNew = empresa.getConceptos();
             List<Empleado> attachedEmpleadosNew = new ArrayList<Empleado>();
             for (Empleado empleadosNewEmpleadoToAttach : empleadosNew) {
                 empleadosNewEmpleadoToAttach = em.getReference(empleadosNewEmpleadoToAttach.getClass(), empleadosNewEmpleadoToAttach.getId());
@@ -136,6 +157,13 @@ public class EmpresaJpaController implements Serializable {
             }
             tiposDeMovimientosNew = attachedTiposDeMovimientosNew;
             empresa.setTiposDeMovimientos(tiposDeMovimientosNew);
+            List<Concepto> attachedConceptosNew = new ArrayList<Concepto>();
+            for (Concepto conceptosNewConceptoToAttach : conceptosNew) {
+                conceptosNewConceptoToAttach = em.getReference(conceptosNewConceptoToAttach.getClass(), conceptosNewConceptoToAttach.getId());
+                attachedConceptosNew.add(conceptosNewConceptoToAttach);
+            }
+            conceptosNew = attachedConceptosNew;
+            empresa.setConceptos(conceptosNew);
             empresa = em.merge(empresa);
             for (Empleado empleadosOldEmpleado : empleadosOld) {
                 if (!empleadosNew.contains(empleadosOldEmpleado)) {
@@ -188,6 +216,23 @@ public class EmpresaJpaController implements Serializable {
                     }
                 }
             }
+            for (Concepto conceptosOldConcepto : conceptosOld) {
+                if (!conceptosNew.contains(conceptosOldConcepto)) {
+                    conceptosOldConcepto.setUnaEmpresaCC(null);
+                    conceptosOldConcepto = em.merge(conceptosOldConcepto);
+                }
+            }
+            for (Concepto conceptosNewConcepto : conceptosNew) {
+                if (!conceptosOld.contains(conceptosNewConcepto)) {
+                    Empresa oldUnaEmpresaCCOfConceptosNewConcepto = conceptosNewConcepto.getUnaEmpresaCC();
+                    conceptosNewConcepto.setUnaEmpresaCC(empresa);
+                    conceptosNewConcepto = em.merge(conceptosNewConcepto);
+                    if (oldUnaEmpresaCCOfConceptosNewConcepto != null && !oldUnaEmpresaCCOfConceptosNewConcepto.equals(empresa)) {
+                        oldUnaEmpresaCCOfConceptosNewConcepto.getConceptos().remove(conceptosNewConcepto);
+                        oldUnaEmpresaCCOfConceptosNewConcepto = em.merge(oldUnaEmpresaCCOfConceptosNewConcepto);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -231,6 +276,11 @@ public class EmpresaJpaController implements Serializable {
             for (TipoMovimiento tiposDeMovimientosTipoMovimiento : tiposDeMovimientos) {
                 tiposDeMovimientosTipoMovimiento.setUnaEmpresaTM(null);
                 tiposDeMovimientosTipoMovimiento = em.merge(tiposDeMovimientosTipoMovimiento);
+            }
+            List<Concepto> conceptos = empresa.getConceptos();
+            for (Concepto conceptosConcepto : conceptos) {
+                conceptosConcepto.setUnaEmpresaCC(null);
+                conceptosConcepto = em.merge(conceptosConcepto);
             }
             em.remove(empresa);
             em.getTransaction().commit();

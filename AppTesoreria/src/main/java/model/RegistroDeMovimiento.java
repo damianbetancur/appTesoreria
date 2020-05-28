@@ -36,7 +36,7 @@ public class RegistroDeMovimiento implements Serializable {
     @Column(name = "fecha")
     private Date fecha;
 
-    private Float saldo;
+    private float saldo;
 
     @ManyToOne
     @JoinColumn(name = "fk_cuenta")
@@ -87,11 +87,11 @@ public class RegistroDeMovimiento implements Serializable {
         this.fecha = fecha;
     }
 
-    public Float getSaldo() {
+    public float getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(Float saldo) {
+    public void setSaldo(float saldo) {
         this.saldo = saldo;
     }
     

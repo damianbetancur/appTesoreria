@@ -15,6 +15,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import model.Concepto;
+import model.Empresa;
 
 /**
  *
@@ -36,7 +37,16 @@ public class ConceptoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Empresa unaEmpresaCC = concepto.getUnaEmpresaCC();
+            if (unaEmpresaCC != null) {
+                unaEmpresaCC = em.getReference(unaEmpresaCC.getClass(), unaEmpresaCC.getId());
+                concepto.setUnaEmpresaCC(unaEmpresaCC);
+            }
             em.persist(concepto);
+            if (unaEmpresaCC != null) {
+                unaEmpresaCC.getConceptos().add(concepto);
+                unaEmpresaCC = em.merge(unaEmpresaCC);
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -50,7 +60,22 @@ public class ConceptoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Concepto persistentConcepto = em.find(Concepto.class, concepto.getId());
+            Empresa unaEmpresaCCOld = persistentConcepto.getUnaEmpresaCC();
+            Empresa unaEmpresaCCNew = concepto.getUnaEmpresaCC();
+            if (unaEmpresaCCNew != null) {
+                unaEmpresaCCNew = em.getReference(unaEmpresaCCNew.getClass(), unaEmpresaCCNew.getId());
+                concepto.setUnaEmpresaCC(unaEmpresaCCNew);
+            }
             concepto = em.merge(concepto);
+            if (unaEmpresaCCOld != null && !unaEmpresaCCOld.equals(unaEmpresaCCNew)) {
+                unaEmpresaCCOld.getConceptos().remove(concepto);
+                unaEmpresaCCOld = em.merge(unaEmpresaCCOld);
+            }
+            if (unaEmpresaCCNew != null && !unaEmpresaCCNew.equals(unaEmpresaCCOld)) {
+                unaEmpresaCCNew.getConceptos().add(concepto);
+                unaEmpresaCCNew = em.merge(unaEmpresaCCNew);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -79,6 +104,11 @@ public class ConceptoJpaController implements Serializable {
                 concepto.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The concepto with id " + id + " no longer exists.", enfe);
+            }
+            Empresa unaEmpresaCC = concepto.getUnaEmpresaCC();
+            if (unaEmpresaCC != null) {
+                unaEmpresaCC.getConceptos().remove(concepto);
+                unaEmpresaCC = em.merge(unaEmpresaCC);
             }
             em.remove(concepto);
             em.getTransaction().commit();

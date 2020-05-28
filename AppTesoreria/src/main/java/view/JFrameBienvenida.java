@@ -52,6 +52,8 @@ public class JFrameBienvenida extends javax.swing.JFrame {
         text.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         text.setForeground(new java.awt.Color(255, 255, 255));
 
+        barra.setBorderPainted(false);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/background.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

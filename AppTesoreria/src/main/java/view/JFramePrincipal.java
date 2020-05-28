@@ -6,6 +6,7 @@
 package view;
 
 import controller.LoginController;
+import controller.ProcesarMovimientosDeCuentaDeEmpresa;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -18,11 +19,14 @@ import model.TipoUsuario;
  */
 public class JFramePrincipal extends javax.swing.JFrame {
 
+    private ProcesarMovimientosDeCuentaDeEmpresa controlador;
+    
     private TipoUsuario tipoUsuario = null;
     
     private PanelEmpresa unPanelEmpresa;
     private PanelEmpleado unPanelEmpleado;
     private PanelUsuario unPanelUsuario;
+    private PanelSeleccionDeCuentas unPanelSeleccionDeCuenta;
 
     /**
      * captura la seleccion en el arbol
@@ -33,6 +37,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
      * Creates new form JFramePrincipal
      */
     public JFramePrincipal() {
+        
+        
+        
         //Carga Icono de la empresa
         try {
             //Icono de la aplicacion
@@ -43,6 +50,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         initComponents();
         this.setSize(1200, 750);
         this.setTitle("Aplicacion de Tesoreria");
+        this.getContentPane().setBackground(new Color(89, 97, 106));
     }
 
     /**
@@ -86,29 +94,17 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         arbolModulos.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
         arbolModulos.setForeground(new java.awt.Color(255, 255, 255));
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("El Porvenir");
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Empresa");
         javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Administración General");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Organismo");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Personas");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Empresa");
         treeNode2.add(treeNode3);
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Empleados");
         treeNode2.add(treeNode3);
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Usuarios");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Gestión de Turnos");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Asignar Turno");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Reasignar Turno");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Gestion de Tramite");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Procesar Tramite");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Ver cantidad de Tramites por Area");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Ver cantidad deTipo de tramite por Area");
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Modulo de Contabilidad");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Registrar Movimientos");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         arbolModulos.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -141,7 +137,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanelContenido.setBackground(new java.awt.Color(89, 97, 106));
+        jPanelContenido.setBackground(new java.awt.Color(95, 212, 175));
         jPanelContenido.setAlignmentX(0.0F);
         jPanelContenido.setAlignmentY(0.0F);
         jPanelContenido.setAutoscrolls(true);
@@ -166,8 +162,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jPanelContenidoLayout.setVerticalGroup(
             jPanelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelContenidoLayout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
                 .addGap(24, 24, 24))
         );
 
@@ -223,12 +219,13 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlbl_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlbl_puesto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlbl_TipoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jlbl_puesto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlbl_TipoUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlbl_usuario, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -271,10 +268,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 Si ejecutamos nos daremos cuenta que esto
                 genera una excepciòn ya que la cadena es nula*/
 
-                if (captura.equals("[El Porvenir, Administración General, Organismo]")) {
-                    
-                    habilitarArbol(false);
+                if (captura.equals("[Empresa, Administración General, Empresa]")) {
 
+                    habilitarArbol(false);
+                    
                     //Se crea el Panel Emplesa
                     this.unPanelEmpresa = new PanelEmpresa();
                     this.unPanelEmpresa.setSize(950, 750);
@@ -284,8 +281,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     this.unPanelEmpresa.validate();
 
                 }
-                
-                if (captura.equals("[El Porvenir, Administración General, Empleados]")) {
+
+                if (captura.equals("[Empresa, Administración General, Empleados]")) {
 
                     habilitarArbol(false);
 
@@ -295,11 +292,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     this.unPanelEmpleado.setVisible(true);
 
                     this.jPanelContenido.add(this.unPanelEmpleado);
-                    
+
                     this.unPanelEmpleado.validate();
                 }
 
-                if (captura.equals("[El Porvenir, Administración General, Usuarios]")) {
+                if (captura.equals("[Empresa, Administración General, Usuarios]")) {
 
                     habilitarArbol(false);
 
@@ -309,10 +306,25 @@ public class JFramePrincipal extends javax.swing.JFrame {
                     this.unPanelUsuario.setVisible(true);
 
                     this.jPanelContenido.add(this.unPanelUsuario);
-                    
+
                     this.unPanelUsuario.validate();
                 }
+                
+                if (captura.equals("[Empresa, Modulo de Contabilidad, Registrar Movimientos]")) {
+                    
+                    this.controlador = new ProcesarMovimientosDeCuentaDeEmpresa();
+                    habilitarArbol(false);
 
+                    
+                    //Se crea el Panel Emplesa
+                    this.unPanelSeleccionDeCuenta = new PanelSeleccionDeCuentas(this.controlador);
+                    this.unPanelSeleccionDeCuenta.setSize(950, 750);
+                    this.unPanelSeleccionDeCuenta.setVisible(true);
+
+                    this.jPanelContenido.add(this.unPanelSeleccionDeCuenta);
+
+                    this.unPanelSeleccionDeCuenta.validate();
+                }
                 
 
             }
@@ -380,10 +392,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
         this.jPanelContenido.removeAll();
         this.jPanelContenido.repaint();
         this.jPanelContenido.validate();
-        
+
         this.repaint();
         this.validate();
     }
+
     public static javax.swing.JPanel getjPanelArbol() {
         return jPanelArbol;
     }

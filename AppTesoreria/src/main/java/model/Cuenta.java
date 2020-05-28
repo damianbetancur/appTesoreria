@@ -29,6 +29,10 @@ public class Cuenta implements Serializable {
     private Long id;
 
     private String numeroDeCuenta;
+    
+    private String descripcion;
+    
+    private Float saldoTotal;
 
     @OneToMany(mappedBy = "unaCuenta")
     private List<RegistroDeMovimiento> registros;
@@ -71,7 +75,7 @@ public class Cuenta implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Cuenta[ id=" + id + " ]";
+        return getDescripcion() + "- n°: "+ getNumeroDeCuenta();
     }
 
     public String getNumeroDeCuenta() {
@@ -96,6 +100,22 @@ public class Cuenta implements Serializable {
 
     public void setRegistros(List<RegistroDeMovimiento> registros) {
         this.registros = registros;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Float getSaldoTotal() {
+        return saldoTotal;
+    }
+
+    public void setSaldoTotal(Float saldoTotal) {
+        this.saldoTotal = saldoTotal;
     }
 
     

@@ -44,11 +44,15 @@ public class Empresa implements Serializable {
 
     @OneToMany(mappedBy = "unaEmpresaTM")
     private List<TipoMovimiento> tiposDeMovimientos;
+    
+    @OneToMany(mappedBy = "unaEmpresaCC")
+    private List<Concepto> conceptos;
 
     public Empresa() {
         this.empleados = new ArrayList<>();
         this.cuentas = new ArrayList<>();
         this.tiposDeMovimientos = new ArrayList<>();
+        this.conceptos = new ArrayList<>();
     }
 
     public Long getId() {
@@ -132,7 +136,24 @@ public class Empresa implements Serializable {
         this.tiposDeMovimientos = tiposDeMovimientos;
     }
 
-    
+    public Cuenta buscarCuenta(Cuenta unaCuenta) {
+        Cuenta cuentaEncontrada = null;
+
+        for (Cuenta cuentaRecorrido : cuentas) {
+            if (unaCuenta.getId() == cuentaRecorrido.getId()) {
+                cuentaEncontrada = cuentaRecorrido;
+            }
+        }
+        return cuentaEncontrada;
+    }
+
+    public List<Concepto> getConceptos() {
+        return conceptos;
+    }
+
+    public void setConceptos(List<Concepto> conceptos) {
+        this.conceptos = conceptos;
+    }
 
     
 }

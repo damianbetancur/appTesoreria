@@ -25,7 +25,7 @@ public class LineaDeMovimiento implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Float monto;
+    private float monto;
 
     @ManyToOne
     @JoinColumn(name = "fk_concepto")
@@ -75,11 +75,11 @@ public class LineaDeMovimiento implements Serializable {
         return "model.LineaDeMovimiento[ id=" + id + " ]";
     }
 
-    public Float getMonto() {
+    public float getMonto() {
         return monto;
     }
 
-    public void setMonto(Float monto) {
+    public void setMonto(float monto) {
         this.monto = monto;
     }
 

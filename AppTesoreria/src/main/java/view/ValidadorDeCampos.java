@@ -8,6 +8,7 @@ package view;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JButton;
@@ -186,47 +187,91 @@ public class ValidadorDeCampos {
     }
 
     /**
-     * calcularFechaTurno Calcula la edad en funcion a la fechaDenacimiento ingresada
+     * validarFechaIgualOSuperior valida la fecha ingresada que sea igual o
+     * superior a la fecha actual
      *
-     * @param fechaDeTurno
+     * @param fecha
      * @return
      */
-    public boolean calcularFechaTurno(Date fechaDeTurno) {
-        boolean turnoValido = false;
+    public boolean validarFechaIgualOSuperior(Date fecha) {
+        boolean fecha_validada = false;
         Calendar calendario = Calendar.getInstance(); // fecha actual
         int anioDeHoy = calendario.get(Calendar.YEAR);
         int mesDeHoy = calendario.get(Calendar.MONTH);
         int diaDeHoy = calendario.get(Calendar.DAY_OF_MONTH);
 
-        calendario.setTime(fechaDeTurno); // fecha de turno
-        int anioDeTurno = calendario.get(Calendar.YEAR);
-        int mesDeTurno = calendario.get(Calendar.MONTH);
-        int diaTurno = calendario.get(Calendar.DAY_OF_MONTH);
+        calendario.setTime(fecha); // fecha ingresada
+        int aniofechaIngresada = calendario.get(Calendar.YEAR);
+        int mesFechaIngresada = calendario.get(Calendar.MONTH);
+        int diaFechaIngresada = calendario.get(Calendar.DAY_OF_MONTH);
 
-        if (anioDeTurno >= anioDeHoy) {
-            turnoValido = true;
-        }else{
-            turnoValido = false;
+        if (aniofechaIngresada >= anioDeHoy) {
+            fecha_validada = true;
+        } else {
+            fecha_validada = false;
         }
 
-        if (anioDeTurno == anioDeHoy) {
-            if (mesDeTurno > mesDeHoy) {
-                turnoValido = true;
-            }else{
-                turnoValido = false;
+        if (aniofechaIngresada == anioDeHoy) {
+            if (mesFechaIngresada > mesDeHoy) {
+                fecha_validada = true;
+            } else {
+                fecha_validada = false;
             }
         }
-        
-        if (anioDeTurno == anioDeHoy) {
-            if (mesDeTurno == mesDeHoy) {
-                if (diaTurno>=diaDeHoy) {
-                    turnoValido = true;
-                }else{
-                    turnoValido = false;
+
+        if (aniofechaIngresada == anioDeHoy) {
+            if (mesFechaIngresada == mesDeHoy) {
+                if (diaFechaIngresada >= diaDeHoy) {
+                    fecha_validada = true;
+                } else {
+                    fecha_validada = false;
                 }
             }
         }
 
-        return turnoValido;
+        return fecha_validada;
+    }
+
+    public Date removeTime(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();
+    }
+
+    public boolean comprarFecha(Date fechaA, Date fechaB) {
+
+        boolean fecha_validada = false;
+
+        Calendar calendario = Calendar.getInstance(); // fecha actual     
+        calendario.setTime(fechaA); // fecha ingresada
+        int aniofechaA = calendario.get(Calendar.YEAR);
+        int mesfechaA = calendario.get(Calendar.MONTH);
+        int diafechaA = calendario.get(Calendar.DAY_OF_MONTH) + 1;
+
+        calendario.setTime(fechaB); // fecha ingresada
+        int aniofechaB = calendario.get(Calendar.YEAR);
+        int mesfechaB = calendario.get(Calendar.MONTH);
+        int diafechaB = calendario.get(Calendar.DAY_OF_MONTH);
+
+        if (aniofechaA == aniofechaB) {
+            if (mesfechaA == mesfechaB) {
+                if (diafechaA == diafechaB) {
+                    fecha_validada = true;
+                }
+            }
+        }
+
+        return fecha_validada;
+    }
+    
+    public String convertirFechaAString(Date fecha){
+        String fechaConvertida ="";        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");        
+        fechaConvertida = sdf.format(fecha);
+        return fechaConvertida;
     }
 }

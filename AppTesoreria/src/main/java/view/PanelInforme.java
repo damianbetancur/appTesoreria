@@ -341,17 +341,15 @@ public class PanelInforme extends javax.swing.JPanel implements InterfacePanel {
      */
     private void jbtn_exportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_exportarActionPerformed
 
-        //this.controlador.getNuevoTurno().setUnEmpleado(empleadoSeleccionado);
         //Se crea el Panel Emplesa    
-        //PanelProcesarTurno05 unPaneProcesarTurno05 = new PanelProcesarTurno05(this.controlador);
-        //unPaneProcesarTurno05.setSize(950, 750);
-        //unPaneProcesarTurno05.setLocation(0, 0);
-        //unPaneProcesarTurno05.setVisible(true);
-        //JFramePrincipal.modificarPanelContenido(unPanelProcesarTurno02);
-        //JFramePrincipal.getjPanelContenido().removeAll();
-        //JFramePrincipal.getjPanelContenido().add(unPaneProcesarTurno05);
-        //JFramePrincipal.getjPanelContenido().repaint();
-        //JFramePrincipal.getjPanelContenido().validate();
+        PanelGuardarInforme unPaneGuardarInforme = new PanelGuardarInforme(this.controlador);
+        unPaneGuardarInforme.setSize(950, 750);
+        unPaneGuardarInforme.setLocation(0, 0);
+        unPaneGuardarInforme.setVisible(true);
+        JFramePrincipal.getjPanelContenido().removeAll();
+        JFramePrincipal.getjPanelContenido().add(unPaneGuardarInforme);
+        JFramePrincipal.getjPanelContenido().repaint();
+        JFramePrincipal.getjPanelContenido().validate();
 
     }//GEN-LAST:event_jbtn_exportarActionPerformed
 

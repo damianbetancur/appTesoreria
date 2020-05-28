@@ -157,6 +157,12 @@
             <artifactId>edisoncorSX</artifactId>
             <version>SNAPSHOT</version>
         </dependency>
+        
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.9</version>
+        </dependency>
     </dependencies>
     <name>AppTesoreria</name>
     <repositories>

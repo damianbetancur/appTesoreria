@@ -6,8 +6,10 @@
 package controller;
 
 import dao.Conexion;
+import dao.CuentaJpaController;
 import dao.LineaDeMovimientoJpaController;
 import dao.RegistroDeMovimientoJpaController;
+import dao.exceptions.NonexistentEntityException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,8 +31,9 @@ public class ProcesarMovimientosDeCuentaDeEmpresa {
 
     private final ValidadorDeCampos validador;
     //DAO
-    private final RegistroDeMovimientoJpaController registroDeMovimientoDAO;
-    private final LineaDeMovimientoJpaController lineaDeMovimientoDAO;
+    private RegistroDeMovimientoJpaController registroDeMovimientoDAO;
+    private LineaDeMovimientoJpaController lineaDeMovimientoDAO;
+    private CuentaJpaController cuentaDao;
     //Model 
     private Cuenta cuentaSeleccionada;
     private Date fechaSeleccionada;
@@ -45,6 +48,7 @@ public class ProcesarMovimientosDeCuentaDeEmpresa {
         registroDeMovimientoDAO = new RegistroDeMovimientoJpaController(Conexion.getEmf());
         registroSeleccionado = new RegistroDeMovimiento();
         lineaDeMovimientoDAO = new LineaDeMovimientoJpaController(Conexion.getEmf());
+        cuentaDao = new CuentaJpaController(Conexion.getEmf());
     }
 
     public List<Cuenta> buscarTodasLasCuentasDeEmpresa() {
@@ -125,40 +129,38 @@ public class ProcesarMovimientosDeCuentaDeEmpresa {
     }
 
     public void guardarTodo() throws SQLException, Exception {
+        float saldoTotal = 0;
         actualizarSaldo();
         if (!registroNuevo) {
             for (LineaDeMovimiento lineaDeMovimiento : registroSeleccionado.getLineasDeRegistroDeMovimiento()) {
-                if (lineaDeMovimiento.getId() == null) {               
+                if (lineaDeMovimiento.getId() == null) {
                     lineaDeMovimiento.setUnRegistro(registroSeleccionado);
                     lineaDeMovimiento.setUnEmpleado(empleadoLoEmpleado);
-                    lineaDeMovimientoDAO.create(lineaDeMovimiento);                    
+                    lineaDeMovimientoDAO.create(lineaDeMovimiento);
                 }
             }
-            registroDeMovimientoDAO.edit(registroSeleccionado);
-        }else{
-            guardarNuevo ();
-        }
-    }
-    
-    public void guardarNuevo (){
-    
-            for (LineaDeMovimiento lineaDeMovimiento : registroSeleccionado.getLineasDeRegistroDeMovimiento()) {
-                    lineaDeMovimiento.setUnRegistro(registroSeleccionado);
-                    lineaDeMovimiento.setUnEmpleado(empleadoLoEmpleado);
-            }
-            
-            registroDeMovimientoDAO.create(registroSeleccionado);
+            registroDeMovimientoDAO.edit(registroSeleccionado);            
+        } else {
+            guardarNuevo(this.registroSeleccionado);            
+        }  
+        
+        
     }
 
-    /*
-    public float getRegistroDeCuenta(){
-        float saldoDeCuenta = 0;
-        for (RegistroDeMovimiento registrosRecorrido : this.registroSeleccionado.getUnaCuenta().getRegistros()) {
-            saldoDeCuenta = saldoDeCuenta + registrosRecorrido.getSaldo();
+    public void guardarNuevo(RegistroDeMovimiento nuevoRegistroDeMovimiento) throws NonexistentEntityException, Exception {
+        RegistroDeMovimiento nrm = new RegistroDeMovimiento();
+        nrm.setFecha(registroSeleccionado.getFecha());
+        nrm.setUnaCuenta(registroSeleccionado.getUnaCuenta());
+        nrm.setSaldo(registroSeleccionado.getSaldo());
+
+        registroDeMovimientoDAO.create(nrm);
+        for (LineaDeMovimiento lineaDeMovimiento : registroSeleccionado.getLineasDeRegistroDeMovimiento()) {
+            lineaDeMovimiento.setUnEmpleado(empleadoLoEmpleado);
+            lineaDeMovimiento.setUnRegistro(nrm);
+            lineaDeMovimientoDAO.create(lineaDeMovimiento);
         }
-        return saldoDeCuenta;
     }
-     */
+
     public RegistroDeMovimiento getRegistroSeleccionado() {
         return registroSeleccionado;
     }
@@ -175,4 +177,9 @@ public class ProcesarMovimientosDeCuentaDeEmpresa {
         this.registroNuevo = registroNuevo;
     }
 
+    
+    public void GenerarArchivo(){
+    
+    
+    }
 }

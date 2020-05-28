@@ -216,6 +216,4 @@ public class CuentaJpaController implements Serializable {
         }
     }
     
-    
-    
 }

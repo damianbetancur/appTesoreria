@@ -36,7 +36,7 @@ public class LineaDeMovimiento implements Serializable {
     private Empleado unEmpleado;
     
     @ManyToOne
-    @JoinColumn(name = "fk_registro")
+    @JoinColumn(name = "fk_registro" , nullable = false, updatable = false)
     private RegistroDeMovimiento unRegistro;
 
     public LineaDeMovimiento() {

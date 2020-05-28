@@ -3,6 +3,7 @@ view\PanelSeleccionDeCuentas$1.class
 view\PanelUsuario$3.class
 dao\ConceptoJpaController.class
 view\JFramePrincipal.class
+.netbeans_automatic_build
 view\PanelEmpresa.class
 model\TipoMovimiento.class
 view\PanelUsuario$8.class
@@ -60,6 +61,7 @@ controller\LoginController.class
 dao\TipoEmpleadoJpaController.class
 view\PanelAgregarMovimiento.class
 model\RegistroDeMovimiento_.class
+view\PanelGuardarInforme$1.class
 view\PanelInforme$2.class
 controller\Main.class
 view\PanelUsuario$15.class
@@ -87,6 +89,7 @@ view\PanelRegistroDeMovimientos.class
 model\LineaDeMovimiento.class
 view\PanelEmpleado$6.class
 dao\exceptions\IllegalOrphanException.class
+view\PanelGuardarInforme$3.class
 view\PanelRegistroDeMovimientos$2.class
 view\PanelInforme$1.class
 view\PanelEmpleado$5.class
@@ -96,6 +99,7 @@ model\Empresa.class
 view\PanelRegistroDeMovimientos$1.class
 view\PanelAgregarMovimiento$3.class
 dao\LineaDeMovimientoJpaController.class
+view\PanelGuardarInforme$2.class
 model\RegistroDeMovimiento.class
 view\PanelEmpleado$4.class
 view\PanelAgregarMovimiento$4.class
@@ -103,7 +107,9 @@ view\PanelEmpleado$2.class
 model\TipoEmpleado.class
 view\JFrameBienvenida.class
 view\PanelAgregarMovimiento$5.class
+view\PanelGuardarInforme.class
 view\JFrameLogin.class
+view\PanelGuardarInforme$4.class
 model\TipoUsuario.class
 model\TipoEmpleado_.class
 view\PanelEmpleado$1.class

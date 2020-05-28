@@ -5,6 +5,7 @@
  */
 package dao;
 
+import dao.exceptions.IllegalOrphanException;
 import dao.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import javax.persistence.Query;
@@ -36,7 +37,7 @@ public class RegistroDeMovimientoJpaController implements Serializable {
 
     public void create(RegistroDeMovimiento registroDeMovimiento) {
         if (registroDeMovimiento.getLineasDeRegistroDeMovimiento() == null) {
-            registroDeMovimiento.setLineasDeRegistroDeMovimiento(new ArrayList<LineaDeMovimiento>());
+            registroDeMovimiento.setLineasDeRegistroDeMovimiento(new ArrayList<>());
         }
         EntityManager em = null;
         try {
@@ -75,7 +76,7 @@ public class RegistroDeMovimientoJpaController implements Serializable {
         }
     }
 
-    public void edit(RegistroDeMovimiento registroDeMovimiento) throws NonexistentEntityException, Exception {
+    public void edit(RegistroDeMovimiento registroDeMovimiento) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -85,6 +86,18 @@ public class RegistroDeMovimientoJpaController implements Serializable {
             Cuenta unaCuentaNew = registroDeMovimiento.getUnaCuenta();
             List<LineaDeMovimiento> lineasDeRegistroDeMovimientoOld = persistentRegistroDeMovimiento.getLineasDeRegistroDeMovimiento();
             List<LineaDeMovimiento> lineasDeRegistroDeMovimientoNew = registroDeMovimiento.getLineasDeRegistroDeMovimiento();
+            List<String> illegalOrphanMessages = null;
+            for (LineaDeMovimiento lineasDeRegistroDeMovimientoOldLineaDeMovimiento : lineasDeRegistroDeMovimientoOld) {
+                if (!lineasDeRegistroDeMovimientoNew.contains(lineasDeRegistroDeMovimientoOldLineaDeMovimiento)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain LineaDeMovimiento " + lineasDeRegistroDeMovimientoOldLineaDeMovimiento + " since its unRegistro field is not nullable.");
+                }
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             if (unaCuentaNew != null) {
                 unaCuentaNew = em.getReference(unaCuentaNew.getClass(), unaCuentaNew.getId());
                 registroDeMovimiento.setUnaCuenta(unaCuentaNew);
@@ -104,12 +117,6 @@ public class RegistroDeMovimientoJpaController implements Serializable {
             if (unaCuentaNew != null && !unaCuentaNew.equals(unaCuentaOld)) {
                 unaCuentaNew.getRegistros().add(registroDeMovimiento);
                 unaCuentaNew = em.merge(unaCuentaNew);
-            }
-            for (LineaDeMovimiento lineasDeRegistroDeMovimientoOldLineaDeMovimiento : lineasDeRegistroDeMovimientoOld) {
-                if (!lineasDeRegistroDeMovimientoNew.contains(lineasDeRegistroDeMovimientoOldLineaDeMovimiento)) {
-                    lineasDeRegistroDeMovimientoOldLineaDeMovimiento.setUnRegistro(null);
-                    lineasDeRegistroDeMovimientoOldLineaDeMovimiento = em.merge(lineasDeRegistroDeMovimientoOldLineaDeMovimiento);
-                }
             }
             for (LineaDeMovimiento lineasDeRegistroDeMovimientoNewLineaDeMovimiento : lineasDeRegistroDeMovimientoNew) {
                 if (!lineasDeRegistroDeMovimientoOld.contains(lineasDeRegistroDeMovimientoNewLineaDeMovimiento)) {
@@ -139,7 +146,7 @@ public class RegistroDeMovimientoJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(Long id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -151,15 +158,21 @@ public class RegistroDeMovimientoJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The registroDeMovimiento with id " + id + " no longer exists.", enfe);
             }
+            List<String> illegalOrphanMessages = null;
+            List<LineaDeMovimiento> lineasDeRegistroDeMovimientoOrphanCheck = registroDeMovimiento.getLineasDeRegistroDeMovimiento();
+            for (LineaDeMovimiento lineasDeRegistroDeMovimientoOrphanCheckLineaDeMovimiento : lineasDeRegistroDeMovimientoOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This RegistroDeMovimiento (" + registroDeMovimiento + ") cannot be destroyed since the LineaDeMovimiento " + lineasDeRegistroDeMovimientoOrphanCheckLineaDeMovimiento + " in its lineasDeRegistroDeMovimiento field has a non-nullable unRegistro field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             Cuenta unaCuenta = registroDeMovimiento.getUnaCuenta();
             if (unaCuenta != null) {
                 unaCuenta.getRegistros().remove(registroDeMovimiento);
                 unaCuenta = em.merge(unaCuenta);
-            }
-            List<LineaDeMovimiento> lineasDeRegistroDeMovimiento = registroDeMovimiento.getLineasDeRegistroDeMovimiento();
-            for (LineaDeMovimiento lineasDeRegistroDeMovimientoLineaDeMovimiento : lineasDeRegistroDeMovimiento) {
-                lineasDeRegistroDeMovimientoLineaDeMovimiento.setUnRegistro(null);
-                lineasDeRegistroDeMovimientoLineaDeMovimiento = em.merge(lineasDeRegistroDeMovimientoLineaDeMovimiento);
             }
             em.remove(registroDeMovimiento);
             em.getTransaction().commit();

@@ -164,7 +164,7 @@ public class UsuarioJpaController implements Serializable {
             em.close();
         }
     }
-
+    
     public Usuario iniciarSesion(Usuario us) {
         EntityManager em = getEntityManager();
         Usuario usuario = null;
@@ -207,5 +207,4 @@ public class UsuarioJpaController implements Serializable {
         }
         return usuario;
     }
-
 }

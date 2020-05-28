@@ -47,7 +47,7 @@ public class RegistroDeMovimientoJpaController implements Serializable {
                 unaCuenta = em.getReference(unaCuenta.getClass(), unaCuenta.getId());
                 registroDeMovimiento.setUnaCuenta(unaCuenta);
             }
-            List<LineaDeMovimiento> attachedLineasDeRegistroDeMovimiento = new ArrayList<LineaDeMovimiento>();
+            List<LineaDeMovimiento> attachedLineasDeRegistroDeMovimiento = new ArrayList<>();
             for (LineaDeMovimiento lineasDeRegistroDeMovimientoLineaDeMovimientoToAttach : registroDeMovimiento.getLineasDeRegistroDeMovimiento()) {
                 lineasDeRegistroDeMovimientoLineaDeMovimientoToAttach = em.getReference(lineasDeRegistroDeMovimientoLineaDeMovimientoToAttach.getClass(), lineasDeRegistroDeMovimientoLineaDeMovimientoToAttach.getId());
                 attachedLineasDeRegistroDeMovimiento.add(lineasDeRegistroDeMovimientoLineaDeMovimientoToAttach);

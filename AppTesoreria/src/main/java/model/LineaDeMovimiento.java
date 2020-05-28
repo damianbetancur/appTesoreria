@@ -40,7 +40,10 @@ public class LineaDeMovimiento implements Serializable {
     private RegistroDeMovimiento unRegistro;
 
     public LineaDeMovimiento() {
+        
     }
+    
+    
 
     public Long getId() {
         return id;

@@ -9,21 +9,15 @@ import controller.ProcesarMovimientosDeCuentaDeEmpresa;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
-import model.Cuenta;
-import model.Empleado;
 import model.LineaDeMovimiento;
-import view.resources.TablaEmpleadoModelo;
 import view.resources.TablaLineasDeMovimientoModelo;
 
 /**
  *
  * @author Ariel
  */
-public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements InterfacePanel {
+public class PanelInforme extends javax.swing.JPanel implements InterfacePanel {
 
     private final ValidadorDeCampos validador;
 
@@ -42,7 +36,7 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
      *
      * @param controlador
      */
-    public PanelRegistroDeMovimientos(ProcesarMovimientosDeCuentaDeEmpresa controlador) {
+    public PanelInforme(ProcesarMovimientosDeCuentaDeEmpresa controlador) {
         //JTable vacio
         this.tablaLineaDeMovimientoModelo = new TablaLineasDeMovimientoModelo();
         this.validador = new ValidadorDeCampos();
@@ -53,8 +47,7 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
         initComponents();
         habilitarTodosLosBotones(false);
         this.validador.habilitarBoton(true, this.jbtn_cancelar, Color.red, Color.WHITE, null, null);
-        this.validador.habilitarBoton(false, this.jbtn_generarInforme, new Color(30, 132, 73), Color.WHITE, null, null);
-        this.validador.habilitarBoton(true, this.jbtn_agregarMovimiento, new Color(30, 132, 73), Color.WHITE, null, null);
+        this.validador.habilitarBoton(false, this.jbtn_exportar, new Color(30, 132, 73), Color.WHITE, null, null);
         habilitarTodosLosCampos(false);
 
         //iniciar el controladorPersona de esta vista
@@ -94,19 +87,20 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
         jPanel_datos = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jtf_fecha = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jtf_saldo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jcb_cuenta = new javax.swing.JComboBox<>();
         jlbl_alertaNombre = new javax.swing.JLabel();
         jlbl_alertaApellido = new javax.swing.JLabel();
         jlbl_alertaDNI = new javax.swing.JLabel();
         jlbl_alertaTipoPersona = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jtf_saldoDeCuenta = new javax.swing.JTextField();
         jPanel_crud = new javax.swing.JPanel();
         jScrollPaneTabla = new javax.swing.JScrollPane();
         jtb_lineasDeMovimientos = new javax.swing.JTable();
-        jbtn_agregarMovimiento = new javax.swing.JButton();
-        jbtn_generarInforme = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jtf_saldo = new javax.swing.JTextField();
+        jbtn_exportar = new javax.swing.JButton();
         jbtn_cancelar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -146,12 +140,6 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
         jtf_fecha.setFont(new java.awt.Font("Rockwell", 1, 18)); // NOI18N
         jtf_fecha.setEnabled(false);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("SALDO");
-
-        jtf_saldo.setFont(new java.awt.Font("Rockwell", 1, 18)); // NOI18N
-        jtf_saldo.setEnabled(false);
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("CUENTA");
 
@@ -166,6 +154,13 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
 
         jlbl_alertaTipoPersona.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setText("SALDO DE CUENTA");
+
+        jtf_saldoDeCuenta.setFont(new java.awt.Font("Rockwell", 1, 18)); // NOI18N
+        jtf_saldoDeCuenta.setEnabled(false);
+        jtf_saldoDeCuenta.setFocusable(false);
+
         javax.swing.GroupLayout jPanel_datosLayout = new javax.swing.GroupLayout(jPanel_datos);
         jPanel_datos.setLayout(jPanel_datosLayout);
         jPanel_datosLayout.setHorizontalGroup(
@@ -178,23 +173,29 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
                     .addGroup(jPanel_datosLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jtf_saldo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jtf_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jcb_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_datosLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34))
+                            .addGroup(jPanel_datosLayout.createSequentialGroup()
+                                .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jcb_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_datosLayout.createSequentialGroup()
+                                .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jtf_saldoDeCuenta, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtf_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(440, 440, 440)))
                         .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlbl_alertaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlbl_alertaApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel_datosLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jlbl_alertaDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         jPanel_datosLayout.setVerticalGroup(
             jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,19 +212,16 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
                     .addGroup(jPanel_datosLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_datosLayout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtf_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(10, 10, 10)
-                                .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtf_saldo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_datosLayout.createSequentialGroup()
-                                .addComponent(jcb_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(89, 89, 89)))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcb_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtf_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtf_saldoDeCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jlbl_alertaTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -235,13 +233,11 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
         jtb_lineasDeMovimientos.setModel(tablaLineaDeMovimientoModelo);
         jScrollPaneTabla.setViewportView(jtb_lineasDeMovimientos);
 
-        jbtn_agregarMovimiento.setFont(new java.awt.Font("Rockwell", 1, 18)); // NOI18N
-        jbtn_agregarMovimiento.setText("Agregar Movimiento");
-        jbtn_agregarMovimiento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtn_agregarMovimientoActionPerformed(evt);
-            }
-        });
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("SALDO DE REGISTRO");
+
+        jtf_saldo.setFont(new java.awt.Font("Rockwell", 1, 18)); // NOI18N
+        jtf_saldo.setEnabled(false);
 
         javax.swing.GroupLayout jPanel_crudLayout = new javax.swing.GroupLayout(jPanel_crud);
         jPanel_crud.setLayout(jPanel_crudLayout);
@@ -252,9 +248,11 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
                     .addGroup(jPanel_crudLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jScrollPaneTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 910, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_crudLayout.createSequentialGroup()
+                    .addGroup(jPanel_crudLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtn_agregarMovimiento)))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtf_saldo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel_crudLayout.setVerticalGroup(
@@ -263,20 +261,22 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPaneTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 214, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jbtn_agregarMovimiento)
-                .addGap(21, 21, 21))
+                .addGroup(jPanel_crudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtf_saldo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
         );
 
-        jbtn_generarInforme.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jbtn_generarInforme.setText("GENERAR INFORME");
-        jbtn_generarInforme.addActionListener(new java.awt.event.ActionListener() {
+        jbtn_exportar.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jbtn_exportar.setText("EXPORTAR");
+        jbtn_exportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtn_generarInformeActionPerformed(evt);
+                jbtn_exportarActionPerformed(evt);
             }
         });
 
         jbtn_cancelar.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jbtn_cancelar.setText("CANCELAR REGISTRO");
+        jbtn_cancelar.setText("CANCELAR INFORME");
         jbtn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtn_cancelarActionPerformed(evt);
@@ -291,7 +291,7 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelProgreso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtn_generarInforme, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtn_exportar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbtn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel_datos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel_crud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -307,7 +307,7 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
                 .addGap(18, 18, 18)
                 .addComponent(jPanel_crud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
-                .addComponent(jbtn_generarInforme, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtn_exportar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -321,23 +321,17 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
      */
     private void jbtn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_cancelarActionPerformed
 
-        //Inhabilita Botones
-        habilitarTodosLosBotones(false);
-
-        //limpia todos los campos
-        limpiarTodosLosCampos();
-
-        //Habilita el Arbol de seleccion
-        JFramePrincipal.getArbolModulos().setEnabled(true);
+        //Se crea el Panel Emplesa    
+        PanelRegistroDeMovimientos unPanelRegistroDeMovimientos = new PanelRegistroDeMovimientos(this.controlador);
+        unPanelRegistroDeMovimientos.setSize(950, 750);
+        unPanelRegistroDeMovimientos.setLocation(0, 0);
+        unPanelRegistroDeMovimientos.setVisible(true);
         JFramePrincipal.getjPanelContenido().removeAll();
-
-        this.controlador = null;
-        this.removeAll();
-
-        revalidate();
-        repaint();
-
+        JFramePrincipal.getjPanelContenido().add(unPanelRegistroDeMovimientos);
         JFramePrincipal.getjPanelContenido().repaint();
+        JFramePrincipal.getjPanelContenido().validate();
+        this.removeAll();
+        this.updateUI();
     }//GEN-LAST:event_jbtn_cancelarActionPerformed
 
     /**
@@ -345,50 +339,34 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
      *
      * @param evt
      */
-    private void jbtn_generarInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_generarInformeActionPerformed
+    private void jbtn_exportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_exportarActionPerformed
 
-        try {
-            controlador.guardarTodo();
-            //Se crea el Panel Emplesa
-            PanelInforme unPanelInforme = new PanelInforme(this.controlador);
-            unPanelInforme.setSize(950, 750);
-            unPanelInforme.setLocation(0, 0);
-            unPanelInforme.setVisible(true);
-            JFramePrincipal.getjPanelContenido().removeAll();
-            JFramePrincipal.getjPanelContenido().add(unPanelInforme);
-            JFramePrincipal.getjPanelContenido().repaint();
-            JFramePrincipal.getjPanelContenido().validate();
-        } catch (Exception ex) {
-            Logger.getLogger(PanelRegistroDeMovimientos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_jbtn_generarInformeActionPerformed
-
-    private void jbtn_agregarMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_agregarMovimientoActionPerformed
+        //this.controlador.getNuevoTurno().setUnEmpleado(empleadoSeleccionado);
         //Se crea el Panel Emplesa    
-        PanelAgregarMovimiento unPanelAgregarMovimiento = new PanelAgregarMovimiento(this.controlador);
-        unPanelAgregarMovimiento.setSize(950, 750);
-        unPanelAgregarMovimiento.setLocation(0, 0);
-        unPanelAgregarMovimiento.setVisible(true);
-        JFramePrincipal.getjPanelContenido().removeAll();
-        JFramePrincipal.getjPanelContenido().add(unPanelAgregarMovimiento);
-        JFramePrincipal.getjPanelContenido().repaint();
-        JFramePrincipal.getjPanelContenido().validate();
-        this.updateUI();
-    }//GEN-LAST:event_jbtn_agregarMovimientoActionPerformed
+        //PanelProcesarTurno05 unPaneProcesarTurno05 = new PanelProcesarTurno05(this.controlador);
+        //unPaneProcesarTurno05.setSize(950, 750);
+        //unPaneProcesarTurno05.setLocation(0, 0);
+        //unPaneProcesarTurno05.setVisible(true);
+        //JFramePrincipal.modificarPanelContenido(unPanelProcesarTurno02);
+        //JFramePrincipal.getjPanelContenido().removeAll();
+        //JFramePrincipal.getjPanelContenido().add(unPaneProcesarTurno05);
+        //JFramePrincipal.getjPanelContenido().repaint();
+        //JFramePrincipal.getjPanelContenido().validate();
+
+    }//GEN-LAST:event_jbtn_exportarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanelProgreso;
     private javax.swing.JPanel jPanel_crud;
     private javax.swing.JPanel jPanel_datos;
     private javax.swing.JScrollPane jScrollPaneTabla;
-    private javax.swing.JButton jbtn_agregarMovimiento;
     private javax.swing.JButton jbtn_cancelar;
-    private javax.swing.JButton jbtn_generarInforme;
+    private javax.swing.JButton jbtn_exportar;
     private javax.swing.JComboBox<String> jcb_cuenta;
     private javax.swing.JLabel jlbl_alertaApellido;
     private javax.swing.JLabel jlbl_alertaDNI;
@@ -399,6 +377,7 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
     private javax.swing.JTable jtb_lineasDeMovimientos;
     private javax.swing.JTextField jtf_fecha;
     private javax.swing.JTextField jtf_saldo;
+    private javax.swing.JTextField jtf_saldoDeCuenta;
     // End of variables declaration//GEN-END:variables
 
     //--------------------------------------------------------------------------
@@ -420,14 +399,14 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
 
     @Override
     public void habilitarTodosLosBotones(boolean estado) {
-        this.validador.habilitarBoton(estado, this.jbtn_generarInforme, new Color(30, 132, 73), Color.WHITE, null, null);        
+        this.validador.habilitarBoton(estado, this.jbtn_exportar, new Color(30, 132, 73), Color.WHITE, null, null);        
     }
 
     //--------------------------------------------------------------------------
     //--------------------------Metodos Getters y Settes------------------------
     //--------------------------------------------------------------------------
     public javax.swing.JButton getJbtn_agregar() {
-        return this.jbtn_generarInforme;
+        return this.jbtn_exportar;
     }
 
     public ValidadorDeCampos getValidador() {
@@ -447,15 +426,16 @@ public class PanelRegistroDeMovimientos extends javax.swing.JPanel implements In
         this.jtf_fecha.setText(this.validador.convertirFechaAString(controlador.getRegistroSeleccionado().getFecha()));
         this.jtf_saldo.setText("$ " + controlador.getRegistroSeleccionado().getSaldo());
         
-        
+        this.jtf_saldoDeCuenta.setText("$ " + controlador.getRegistroSeleccionado().getSaldo());
         
         if (!controlador.getRegistroSeleccionado().getLineasDeRegistroDeMovimiento().isEmpty()) {
             this.tablaLineaDeMovimientoModelo.setLineasDeMovimientos(this.controlador.buscarTodasLasLineasDeMovimientoDeUnRegistro());
             //Refrescar el modelo en la tabla
             this.tablaLineaDeMovimientoModelo.fireTableDataChanged();            
-            this.validador.habilitarBoton(true, this.jbtn_generarInforme, new Color(30, 132, 73), Color.WHITE, null, null);
+            this.validador.habilitarBoton(true, this.jbtn_exportar, new Color(30, 132, 73), Color.WHITE, null, null);
+            //this.jtf_saldoDeCuenta.setText("$  "+controlador.getRegistroDeCuenta());
         }else{
-            this.validador.habilitarBoton(false, this.jbtn_generarInforme, new Color(30, 132, 73), Color.WHITE, null, null);
+            this.validador.habilitarBoton(false, this.jbtn_exportar, new Color(30, 132, 73), Color.WHITE, null, null);
         }
 
     }

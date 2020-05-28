@@ -6,7 +6,9 @@
 package controller;
 
 import dao.Conexion;
+import dao.LineaDeMovimientoJpaController;
 import dao.RegistroDeMovimientoJpaController;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,10 +26,11 @@ import view.ValidadorDeCampos;
 public class ProcesarMovimientosDeCuentaDeEmpresa {
 
     private boolean registroNuevo = false;
-    
+
     private final ValidadorDeCampos validador;
     //DAO
     private final RegistroDeMovimientoJpaController registroDeMovimientoDAO;
+    private final LineaDeMovimientoJpaController lineaDeMovimientoDAO;
     //Model 
     private Cuenta cuentaSeleccionada;
     private Date fechaSeleccionada;
@@ -41,6 +44,7 @@ public class ProcesarMovimientosDeCuentaDeEmpresa {
         empleadoLoEmpleado = LoginController.getInstanceUsuario().getUnEmpleado();
         registroDeMovimientoDAO = new RegistroDeMovimientoJpaController(Conexion.getEmf());
         registroSeleccionado = new RegistroDeMovimiento();
+        lineaDeMovimientoDAO = new LineaDeMovimientoJpaController(Conexion.getEmf());
     }
 
     public List<Cuenta> buscarTodasLasCuentasDeEmpresa() {
@@ -56,24 +60,24 @@ public class ProcesarMovimientosDeCuentaDeEmpresa {
                 if (registroRecorrido.getUnaCuenta().equals(unaCuenta)) {
                     if (validador.comprarFecha(registroRecorrido.getFecha(), unaFecha)) {
                         registroDeMovimientoVerificado = true;
-                    } 
-                } 
+                    }
+                }
 
             }
-        }       
+        }
         return registroDeMovimientoVerificado;
     }
-    
-    public RegistroDeMovimiento buscarRegistroDeMovimiento(Cuenta unaCuenta, Date unaFecha){
+
+    public RegistroDeMovimiento buscarRegistroDeMovimiento(Cuenta unaCuenta, Date unaFecha) {
         RegistroDeMovimiento registroDeMovimientoAuxiliar = null;
         for (RegistroDeMovimiento registroRecorrido : registroDeMovimientoDAO.findRegistroDeMovimientoEntities()) {
-                if (registroRecorrido.getUnaCuenta().equals(unaCuenta)) {
-                    if (validador.comprarFecha(registroRecorrido.getFecha(), unaFecha)) {
-                        registroDeMovimientoAuxiliar = registroRecorrido;
-                    } 
-                } 
-
+            if (registroRecorrido.getUnaCuenta().equals(unaCuenta)) {
+                if (validador.comprarFecha(registroRecorrido.getFecha(), unaFecha)) {
+                    registroDeMovimientoAuxiliar = registroRecorrido;
+                }
             }
+
+        }
         return registroDeMovimientoAuxiliar;
     }
 
@@ -120,6 +124,41 @@ public class ProcesarMovimientosDeCuentaDeEmpresa {
         this.registroSeleccionado.setSaldo(0);
     }
 
+    public void guardarTodo() throws SQLException, Exception {
+        actualizarSaldo();
+        if (!registroNuevo) {
+            for (LineaDeMovimiento lineaDeMovimiento : registroSeleccionado.getLineasDeRegistroDeMovimiento()) {
+                if (lineaDeMovimiento.getId() == null) {               
+                    lineaDeMovimiento.setUnRegistro(registroSeleccionado);
+                    lineaDeMovimiento.setUnEmpleado(empleadoLoEmpleado);
+                    lineaDeMovimientoDAO.create(lineaDeMovimiento);                    
+                }
+            }
+            registroDeMovimientoDAO.edit(registroSeleccionado);
+        }else{
+            guardarNuevo ();
+        }
+    }
+    
+    public void guardarNuevo (){
+    
+            for (LineaDeMovimiento lineaDeMovimiento : registroSeleccionado.getLineasDeRegistroDeMovimiento()) {
+                    lineaDeMovimiento.setUnRegistro(registroSeleccionado);
+                    lineaDeMovimiento.setUnEmpleado(empleadoLoEmpleado);
+            }
+            
+            registroDeMovimientoDAO.create(registroSeleccionado);
+    }
+
+    /*
+    public float getRegistroDeCuenta(){
+        float saldoDeCuenta = 0;
+        for (RegistroDeMovimiento registrosRecorrido : this.registroSeleccionado.getUnaCuenta().getRegistros()) {
+            saldoDeCuenta = saldoDeCuenta + registrosRecorrido.getSaldo();
+        }
+        return saldoDeCuenta;
+    }
+     */
     public RegistroDeMovimiento getRegistroSeleccionado() {
         return registroSeleccionado;
     }
@@ -135,6 +174,5 @@ public class ProcesarMovimientosDeCuentaDeEmpresa {
     public void setRegistroNuevo(boolean registroNuevo) {
         this.registroNuevo = registroNuevo;
     }
-    
-    
+
 }

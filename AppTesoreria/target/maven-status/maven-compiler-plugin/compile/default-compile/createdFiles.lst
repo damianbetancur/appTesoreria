@@ -9,6 +9,7 @@ view\PanelUsuario$8.class
 view\JFrameLogin$1.class
 view\PanelUsuario.class
 model\Empleado_.class
+view\PanelInforme.class
 dao\exceptions\NonexistentEntityException.class
 view\JFrameBienvenida$1.class
 view\PanelSeleccionDeCuentas$3.class
@@ -59,6 +60,7 @@ controller\LoginController.class
 dao\TipoEmpleadoJpaController.class
 view\PanelAgregarMovimiento.class
 model\RegistroDeMovimiento_.class
+view\PanelInforme$2.class
 controller\Main.class
 view\PanelUsuario$15.class
 model\Cuenta.class
@@ -86,6 +88,7 @@ model\LineaDeMovimiento.class
 view\PanelEmpleado$6.class
 dao\exceptions\IllegalOrphanException.class
 view\PanelRegistroDeMovimientos$2.class
+view\PanelInforme$1.class
 view\PanelEmpleado$5.class
 model\Empresa_.class
 model\Cuenta_.class

@@ -3,7 +3,6 @@ view\PanelSeleccionDeCuentas$1.class
 view\PanelUsuario$3.class
 dao\ConceptoJpaController.class
 view\JFramePrincipal.class
-.netbeans_automatic_build
 view\PanelEmpresa.class
 model\TipoMovimiento.class
 view\PanelUsuario$8.class

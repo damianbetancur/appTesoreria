@@ -352,9 +352,11 @@ public class PanelSeleccionDeCuentas extends javax.swing.JPanel implements Inter
 
         this.cuentasModel = new DefaultComboBoxModel();
 
+        
         for (Cuenta cuentasRecorrido : this.controlador.buscarTodasLasCuentasDeEmpresa()) {
-            cuentasModel.addElement(cuentasRecorrido);
+            cuentasModel.addElement(cuentasRecorrido);            
         }
+        
 
         this.jcb_cuentaDeEmpresa.setModel(this.cuentasModel);
         repaint();

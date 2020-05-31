@@ -40,11 +40,11 @@ public class ProcesarMovimientosDeCuentaDeEmpresa {
 
     private RegistroDeMovimiento registroSeleccionado;
 
-    private Empleado empleadoLoEmpleado;
+    private Empleado empleadoLogueado;
 
     public ProcesarMovimientosDeCuentaDeEmpresa() {
         validador = new ValidadorDeCampos();
-        empleadoLoEmpleado = LoginController.getInstanceUsuario().getUnEmpleado();
+        empleadoLogueado = LoginController.getInstanceUsuario().getUnEmpleado();
         registroDeMovimientoDAO = new RegistroDeMovimientoJpaController(Conexion.getEmf());
         registroSeleccionado = new RegistroDeMovimiento();
         lineaDeMovimientoDAO = new LineaDeMovimientoJpaController(Conexion.getEmf());
@@ -66,7 +66,6 @@ public class ProcesarMovimientosDeCuentaDeEmpresa {
                         registroDeMovimientoVerificado = true;
                     }
                 }
-
             }
         }
         return registroDeMovimientoVerificado;
@@ -135,7 +134,7 @@ public class ProcesarMovimientosDeCuentaDeEmpresa {
             for (LineaDeMovimiento lineaDeMovimiento : registroSeleccionado.getLineasDeRegistroDeMovimiento()) {
                 if (lineaDeMovimiento.getId() == null) {
                     lineaDeMovimiento.setUnRegistro(registroSeleccionado);
-                    lineaDeMovimiento.setUnEmpleado(empleadoLoEmpleado);
+                    lineaDeMovimiento.setUnEmpleado(empleadoLogueado);
                     lineaDeMovimientoDAO.create(lineaDeMovimiento);
                 }
             }
@@ -143,8 +142,6 @@ public class ProcesarMovimientosDeCuentaDeEmpresa {
         } else {
             guardarNuevo(this.registroSeleccionado);            
         }  
-        
-        
     }
 
     public void guardarNuevo(RegistroDeMovimiento nuevoRegistroDeMovimiento) throws NonexistentEntityException, Exception {
@@ -155,7 +152,7 @@ public class ProcesarMovimientosDeCuentaDeEmpresa {
 
         registroDeMovimientoDAO.create(nrm);
         for (LineaDeMovimiento lineaDeMovimiento : registroSeleccionado.getLineasDeRegistroDeMovimiento()) {
-            lineaDeMovimiento.setUnEmpleado(empleadoLoEmpleado);
+            lineaDeMovimiento.setUnEmpleado(empleadoLogueado);
             lineaDeMovimiento.setUnRegistro(nrm);
             lineaDeMovimientoDAO.create(lineaDeMovimiento);
         }
